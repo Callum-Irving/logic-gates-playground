@@ -3,9 +3,7 @@
 abstract class Gate {
   int x, y; // For displaying on screen
   String[] inputs;
-  // TODO: Make output an arraylist so that one output can connect to multiple things
-  String output;
-  HashSet<String> outputs;
+  ArrayList<String> outputs;
 
   int numInputs;
   abstract boolean _compute(boolean[] inputs);
@@ -15,11 +13,19 @@ abstract class Gate {
     return this._compute(inputs);
   }
 
+  // TODO
+  void addOutput(String destId) {
+    this.outputs.add(destId);
+  }
+
+  void setInput(int i, String srcId) {
+    this.inputs[i] = srcId;
+  }
 
   Gate(int n) {
     this.numInputs = n;
     this.inputs = new String[n];
-    this.outputs = new HashSet<String>();
+    this.outputs = new ArrayList<String>();
   }
 }
 

@@ -24,23 +24,15 @@ class Circuit {
   }
 
   // TODO: Prevent cycles
-  void addConnection(String srcId, String destId) {
-    int i = 0;
-    Gate dest = this.gates.get(destId);
-    while (dest.inputs[i] != null) {
-      i++;
-      if (i == dest.numInputs) return;
-    }
-    dest.inputs[i] = srcId;
-    Gate src = this.gates.get(srcId);
-    if (src == null) {
+  void addConnection(String srcId, String destId, int inputNum) {
+    this.gates.get(destId).setInput(inputNum, srcId);
+    if (this.gates.containsKey(srcId))
+      this.gates.get(srcId).addOutput(destId);
+    else
       this.inputs.get(srcId).add(destId);
-    } else {
-      src.outputs.add(destId);
-    }
   }
 
-  void compute() {
+  void compute(HashMap<String, Boolean> inputs) {
     HashMap<String, boolean[]> outputs = new HashMap<String, boolean[]>();
 
     // Copy all keys from this.gates and set sizes for arrays
@@ -56,6 +48,8 @@ class Circuit {
       LinkedList<String> queue = new LinkedList<String>();
       queue.add(input);
       while (queue.size() != 0) {
+        // TODO: Somehow evaluate each connection and store in outputs
+
         current = queue.poll();
         if (this.gates.containsKey(current)) {
           for (String dest : this.gates.get(current).outputs) {
@@ -65,6 +59,8 @@ class Circuit {
         } else {
           for (String dest : this.inputs.get(current)) {
             println(current, "->", dest);
+            int index = 0; // TODO: position of current in dest.outputs
+            outputs.get(dest)[index] = inputs.get(current);
             queue.add(dest);
           }
         }
