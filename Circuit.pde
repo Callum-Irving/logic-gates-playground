@@ -1,55 +1,76 @@
-import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 
-// Need some sort of graph representation for a circuit made of logic gates
-// Make sure loops are not allowed
-
 class Circuit {
-  // TODO: Implement serialize interface for basegate then remove gates
-  HashMap<String, BaseGate> gates;
-  HashMap<String, ArrayList<String>> connections;
-  int numVerts = 0;
-  int numInputs = 0;
+  HashMap<String, Gate> gates;
+  // TODO: Something about inputs
+
+  // Input names
+  // These are their own thing so that we can loop through them
+  // They also are not gates
+  HashMap<String, ArrayList<String>> inputs;
 
   Circuit() {
-    // TODO
+    this.gates = new HashMap<String, Gate>();
+    this.inputs = new HashMap<String, ArrayList<String>>();
   }
 
-  // TODO
-  void addInput(String name) {
+  void addInput(String id) {
+    this.inputs.put(id, new ArrayList<String>());
   }
 
-  // Returns true if successfull
-  boolean addGate(String name, BaseGate gate) {
-    if (this.gates.get(name) == null) return false;
-    this.gates.put(name, gate);
-    this.numVerts++;
-    return true;
+  void addGate(String id, Gate g) {
+    this.gates.put(id, g);
   }
 
-  // Remove gate and all its connections
-  void removeGate(String name) {
-    this.gates.remove(name);
-    this.connections.remove(name);
-    this.numVerts--;
-    // TODO: Remove all connections where the dest is name
-    // Iterate through this.connections
+  // TODO: Prevent cycles
+  void addConnection(String srcId, String destId) {
+    int i = 0;
+    Gate dest = this.gates.get(destId);
+    while (dest.inputs[i] != null) {
+      i++;
+      if (i == dest.numInputs) return;
+    }
+    dest.inputs[i] = srcId;
+    Gate src = this.gates.get(srcId);
+    if (src == null) {
+      this.inputs.get(srcId).add(destId);
+    } else {
+      src.outputs.add(destId);
+    }
   }
 
-  boolean addConnection(String src, String dest) {
-    ArrayList<String> cons = this.connections.get(src);
-    if (cons == null) return false;
-    cons.add(dest);
-    return true;
-  }
+  void compute() {
+    HashMap<String, boolean[]> outputs = new HashMap<String, boolean[]>();
 
-  void compute(boolean[] inputs) {
-    if (inputs.length != this.numInputs) return;
-    // TODO
-  }
+    // Copy all keys from this.gates and set sizes for arrays
+    // The size of each boolean[] should be the length of that gate's inputs
+    for (String id : this.gates.keySet()) {
+      outputs.put(id, new boolean[this.gates.get(id).numInputs]);
+    }
 
-  void bfs(String src) {
-    // visited array/hashmap
-    LinkedList<String> queue = new LinkedList<String>();
+    String current;
+
+    // Then bfs from each input I guess
+    for (String input : this.inputs.keySet()) {
+      LinkedList<String> queue = new LinkedList<String>();
+      queue.add(input);
+      while (queue.size() != 0) {
+        current = queue.poll();
+        if (this.gates.containsKey(current)) {
+          for (String dest : this.gates.get(current).outputs) {
+            println(current, "->", dest);
+            queue.add(dest);
+          }
+        } else {
+          for (String dest : this.inputs.get(current)) {
+            println(current, "->", dest);
+            queue.add(dest);
+          }
+        }
+      }
+
+      // Too many scopes
+    }
   }
 }
