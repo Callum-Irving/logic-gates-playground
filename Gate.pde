@@ -2,14 +2,13 @@ abstract class Gate {
   int x, y;
   boolean output = false;
 
-  abstract void _show();
+  abstract void show();
   // Returns true if the mouse is colliding with the gate
   abstract boolean mouseOver();
   abstract PVector inputPos(int inputNum);
   abstract PVector outputPos();
 
-  void show() {
-    this._show();
+  void showConnections() {
     for (Connection c : this.connections) {
       c.show();
     }
@@ -50,7 +49,7 @@ class InputGate extends Gate {
     return this.output;
   }
 
-  void _show() {
+  void show() {
     stroke(60);
     strokeWeight(2.5);
     if (this.output)
@@ -84,7 +83,7 @@ class OutputGate extends Gate {
     return inputs[0];
   }
 
-  void _show() {
+  void show() {
     noStroke();
     fill(60);
     circle(this.x, this.y, 20);
@@ -119,11 +118,16 @@ class AndGate extends Gate {
     return inputs[0] & inputs[1];
   }
 
-  void _show() {
+  void show() {
     noStroke();
     fill(30);
     arc(this.x, this.y, 40, 40, -HALF_PI, HALF_PI, PIE);
     rect(this.x - 25, this.y - 20, 25, 40);
+    fill(250);
+    strokeWeight(1);
+    stroke(0);
+    circle(this.inputPos(0).x, this.inputPos(0).y, 12);
+    circle(this.inputPos(1).x, this.inputPos(1).y, 12);
   }
 
   boolean mouseOver() {
@@ -149,7 +153,7 @@ class NotGate extends Gate {
     return !inputs[0];
   }
 
-  void _show() {
+  void show() {
     fill(30);
     triangle(this.x - 25, this.y - 15, this.x - 25, this.y + 15, this.x, this.y);
     circle(this.x + 5, this.y, 10);

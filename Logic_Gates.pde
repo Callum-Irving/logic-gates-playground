@@ -49,6 +49,10 @@ void draw() {
   for (Gate g : circ.gates.values()) {
     g.show();
   }
+  
+  for (Gate g : circ.gates.values()) {
+    g.showConnections();
+  }
 }
 
 void mouseClicked() {
