@@ -10,4 +10,12 @@ class Connection {
     this.dest = dest;
     this.destIndex = destIndex;
   }
+  
+  void show() {
+    stroke(0);
+    strokeWeight(5);
+    PVector src = this.src.outputPos();
+    PVector dest = this.dest.inputPos(this.destIndex);
+    line(src.x, src.y, dest.x, dest.y);
+  }
 }
