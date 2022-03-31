@@ -11,7 +11,6 @@ class Connection {
     this.destIndex = destIndex;
   }
 
-  // TODO: Colour connection based on src.output
   void show() {
     if (this.src.output)
       stroke(235, 235, 52);

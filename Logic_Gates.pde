@@ -21,7 +21,7 @@ void setup() {
   circ.addConnection("and1", "not0", 0);
   circ.addConnection("and1", "output0", 0);
   //circ.addConnection("not0", "output1", 0);
-  
+
   ui = new UiState(circ);
 
   //boolean[] inputs = {true, true, true};

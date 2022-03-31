@@ -38,10 +38,15 @@ class UiState {
   void deselect() {
     if (this.connecting) {
       // Make new connection
+      // TODO: Delete existing connection
       for (String id : this.circuit.gates.keySet()) {
         Gate g = this.circuit.gates.get(id);
         if (g.mouseOverInput() != -1) {
           int inputNum = g.mouseOverInput();
+          // Delete existing connection
+          Gate dest = this.circuit.gates.get(id);
+          dest.removeInput(inputNum);
+
           this.circuit.addConnection(this.selectedId, id, inputNum);
         }
       }

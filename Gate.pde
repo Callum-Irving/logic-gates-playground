@@ -19,6 +19,7 @@ abstract class Gate {
 
   int numInputs;
   ArrayList<Connection> connections;
+  Gate[] inputs;
   abstract boolean _compute(boolean[] inputs);
 
   boolean compute(boolean[] inputs) {
@@ -29,11 +30,26 @@ abstract class Gate {
 
   void addConnection(String srcId, String destId, Gate dest, int inputNum) {
     this.connections.add(new Connection(srcId, this, destId, dest, inputNum));
+    dest.inputs[inputNum] = this;
+  }
+
+  void removeInput(int inputNum) {
+    if (this.inputs[inputNum] != null) {
+      Gate src = this.inputs[inputNum];
+      for (int i = 0; i < src.connections.size(); i++) {
+        if (src.connections.get(i).dest == this) {
+          src.connections.remove(i);
+          this.inputs[inputNum] = null;
+          return;
+        }
+      }
+    }
   }
 
   Gate(int n) {
     this.numInputs = n;
     this.connections = new ArrayList<Connection>();
+    this.inputs = new Gate[n];
     this.x = int(random(width));
     this.y = int(random(height));
   }
