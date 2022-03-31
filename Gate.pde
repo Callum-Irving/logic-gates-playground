@@ -123,11 +123,14 @@ class AndGate extends Gate {
     fill(30);
     arc(this.x, this.y, 40, 40, -HALF_PI, HALF_PI, PIE);
     rect(this.x - 25, this.y - 20, 25, 40);
+    
+    // Draw inputs and outputs
     fill(250);
     strokeWeight(1);
     stroke(0);
     circle(this.inputPos(0).x, this.inputPos(0).y, 12);
     circle(this.inputPos(1).x, this.inputPos(1).y, 12);
+    circle(this.outputPos().x, this.outputPos().y, 12);
   }
 
   boolean mouseOver() {
