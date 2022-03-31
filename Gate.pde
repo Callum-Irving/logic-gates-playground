@@ -5,6 +5,9 @@ abstract class Gate {
   abstract void show();
   // Returns true if the mouse is colliding with the gate
   abstract boolean mouseOver();
+  abstract boolean mouseOverOutput();
+  // Returns -1 if false
+  abstract int mouseOverInput();
   abstract PVector inputPos(int inputNum);
   abstract PVector outputPos();
 
@@ -57,10 +60,23 @@ class InputGate extends Gate {
     else
       fill(0);
     square(this.x - 7.5, this.y - 7.5, 15);
+
+    fill(250);
+    stroke(0);
+    strokeWeight(1);
+    circle(this.x + 7.5, this.y, 10);
   }
 
   boolean mouseOver() {
     return (mouseX > this.x - 10 && mouseX < this.x + 10 && mouseY > this.y - 10 && mouseY < this.y + 10);
+  }
+
+  boolean mouseOverOutput() {
+    return (sqrt(pow(mouseX - this.x - 7.5, 2) + pow(mouseY - this.y, 2)) < 10);
+  }
+
+  int mouseOverInput() {
+    return -1;
   }
 
   // Inputs don't take inputs so this should never be called
@@ -70,7 +86,7 @@ class InputGate extends Gate {
   }
 
   PVector outputPos() {
-    return new PVector(this.x, this.y);
+    return new PVector(this.x + 7.5, this.y);
   }
 }
 
@@ -98,6 +114,17 @@ class OutputGate extends Gate {
     return (sqrt(pow(mouseX - this.x, 2) + pow(mouseY - this.y, 2)) < 10);
   }
 
+  boolean mouseOverOutput() {
+    return false;
+  }
+
+  int mouseOverInput() {
+    if (sqrt(pow(mouseX - this.x, 2) + pow(mouseY - this.y, 2)) < 10)
+      return 0;
+    else
+      return -1;
+  }
+
   PVector inputPos(int _) {
     return new PVector(this.x, this.y);
   }
@@ -123,7 +150,7 @@ class AndGate extends Gate {
     fill(30);
     arc(this.x, this.y, 40, 40, -HALF_PI, HALF_PI, PIE);
     rect(this.x - 25, this.y - 20, 25, 40);
-    
+
     // Draw inputs and outputs
     fill(250);
     strokeWeight(1);
@@ -135,6 +162,20 @@ class AndGate extends Gate {
 
   boolean mouseOver() {
     return (mouseX > this.x - 25 && mouseX < this.x + 20 && mouseY > this.y - 20 && mouseY < this.y + 20);
+  }
+
+  boolean mouseOverOutput() {
+    return (sqrt(pow(mouseX - this.x - 15, 2) + pow(mouseY - this.y, 2)) < 6);
+  }
+
+  int mouseOverInput() {
+    if (sqrt(pow(mouseX - this.inputPos(0).x, 2) + pow(mouseY - this.inputPos(0).y, 2)) < 6) {
+      return 0;
+    } else if (sqrt(pow(mouseX - this.inputPos(1).x, 2) + pow(mouseY - this.inputPos(1).y, 2)) < 6) {
+      return 1;
+    } else {
+      return -1;
+    }
   }
 
   PVector inputPos(int inputNum) {
@@ -159,6 +200,10 @@ class NotGate extends Gate {
   void show() {
     fill(30);
     triangle(this.x - 25, this.y - 15, this.x - 25, this.y + 15, this.x, this.y);
+    stroke(0);
+    strokeWeight(1);
+    fill(250);
+    circle(this.x - 25, this.y, 10);
     circle(this.x + 5, this.y, 10);
   }
 
@@ -166,8 +211,19 @@ class NotGate extends Gate {
     return (mouseX > this.x - 25 && mouseX < this.x + 10 && mouseY > this.y - 15 && mouseY < this.y + 15);
   }
 
+  boolean mouseOverOutput() {
+    return (sqrt(pow(mouseX - this.x - 5, 2) + pow(mouseY - this.y, 2)) < 5);
+  }
+
+  int mouseOverInput() {
+    if (sqrt(pow(mouseX - this.x + 25, 2) + pow(mouseY - this.y, 2)) < 5)
+      return 0;
+    else
+      return -1;
+  }
+
   PVector inputPos(int _) {
-    return new PVector(this.x - 20, this.y);
+    return new PVector(this.x - 25, this.y);
   }
 
   PVector outputPos() {
