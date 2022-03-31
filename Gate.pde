@@ -51,18 +51,17 @@ class InputGate extends Gate {
   }
 
   void _show() {
-    noStroke();
-    fill(60);
-    circle(this.x, this.y, 20);
+    stroke(60);
+    strokeWeight(2.5);
     if (this.output)
       fill(235, 235, 52);
     else
       fill(0);
-    circle(this.x, this.y, 15);
+    square(this.x - 7.5, this.y - 7.5, 15);
   }
 
   boolean mouseOver() {
-    return (sqrt(pow(mouseX - this.x, 2) + pow(mouseY - this.y, 2)) < 10);
+    return (mouseX > this.x - 10 && mouseX < this.x + 10 && mouseY > this.y - 10 && mouseY < this.y + 10);
   }
 
   // Inputs don't take inputs so this should never be called
