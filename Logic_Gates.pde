@@ -51,6 +51,16 @@ void draw() {
   }
 }
 
+void mouseClicked() {
+  for (InputGate g : circ.inputs) {
+    if (g.mouseOver()) {
+      g.output = !g.output;
+      circ.compute();
+      redraw();
+    }
+  }
+}
+
 void mousePressed() {
   for (Gate g : circ.gates.values()) {
     if (g.mouseOver()) {
