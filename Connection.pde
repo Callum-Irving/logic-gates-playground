@@ -10,9 +10,13 @@ class Connection {
     this.dest = dest;
     this.destIndex = destIndex;
   }
-  
+
+  // TODO: Colour connection based on src.output
   void show() {
-    stroke(0);
+    if (this.src.output)
+      stroke(235, 235, 52);
+    else
+      stroke(0);
     strokeWeight(5);
     PVector src = this.src.outputPos();
     PVector dest = this.dest.inputPos(this.destIndex);

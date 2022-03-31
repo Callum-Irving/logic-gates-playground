@@ -1,6 +1,6 @@
 abstract class Gate {
   int x, y;
-  String name;
+  boolean output = false;
 
   abstract void _show();
   // Returns true if the mouse is colliding with the gate
@@ -21,16 +21,16 @@ abstract class Gate {
 
   boolean compute(boolean[] inputs) {
     assert(inputs.length == this.numInputs);
-    return _compute(inputs);
+    this.output = _compute(inputs);
+    return this.output;
   }
 
   void addConnection(String srcId, String destId, Gate dest, int inputNum) {
     this.connections.add(new Connection(srcId, this, destId, dest, inputNum));
   }
 
-  Gate(int n, String name) {
+  Gate(int n) {
     this.numInputs = n;
-    this.name = name;
     this.connections = new ArrayList<Connection>();
     this.x = int(random(width));
     this.y = int(random(height));
@@ -38,10 +38,8 @@ abstract class Gate {
 }
 
 class InputGate extends Gate {
-  boolean output = false;
-
   InputGate() {
-    super(0, "INPUT");
+    super(0);
   }
 
   void setVal(boolean val) {
@@ -79,14 +77,11 @@ class InputGate extends Gate {
 }
 
 class OutputGate extends Gate {
-  boolean value;
-
   OutputGate() {
-    super(1, "OUTPUT");
+    super(1);
   }
 
   boolean _compute(boolean[] inputs) {
-    this.value = inputs[0];
     return inputs[0];
   }
 
@@ -94,7 +89,7 @@ class OutputGate extends Gate {
     noStroke();
     fill(60);
     circle(this.x, this.y, 20);
-    if (this.value)
+    if (this.output)
       fill(52, 149, 235);
     else
       fill(0);
@@ -118,7 +113,7 @@ class OutputGate extends Gate {
 
 class AndGate extends Gate {
   AndGate() {
-    super(2, "AND");
+    super(2);
   }
 
   boolean _compute(boolean[] inputs) {
@@ -148,7 +143,7 @@ class AndGate extends Gate {
 
 class NotGate extends Gate {
   NotGate() {
-    super(1, "NOT");
+    super(1);
   }
 
   boolean _compute(boolean[] inputs) {

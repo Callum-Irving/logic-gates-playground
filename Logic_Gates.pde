@@ -34,7 +34,7 @@ void setup() {
     circ.compute();
 
     print(int(inputs[0]), int(inputs[1]), int(inputs[2]), "| ");
-    println(int(circ.outputs.get("output0").value), int(circ.outputs.get("output1").value));
+    println(int(circ.outputs.get("output0").output), int(circ.outputs.get("output1").output));
   }
 
   size(1280, 720);
