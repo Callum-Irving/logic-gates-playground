@@ -54,8 +54,6 @@ class Circuit {
       }
     }
 
-    // TODO: Compute outputs once done
-
     while (queue.size() != 0) {
       Connection c = queue.poll();
       boolean val = c.src.compute(outputs.get(c.srcId));

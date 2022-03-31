@@ -39,7 +39,7 @@ class InputGate extends Gate {
   }
 
   // Inputs don't take inputs so this should never be called
-  PVector inputPos(int _) {
+  PVector inputPos(int _index) {
     assert(true == false);
     return null;
   }
@@ -84,7 +84,7 @@ class OutputGate extends Gate {
       return -1;
   }
 
-  PVector inputPos(int _) {
+  PVector inputPos(int _index) {
     return new PVector(this.x, this.y);
   }
 

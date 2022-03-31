@@ -32,7 +32,7 @@ class NotGate extends Gate {
       return -1;
   }
 
-  PVector inputPos(int _) {
+  PVector inputPos(int _index) {
     return new PVector(this.x - 25, this.y);
   }
 
