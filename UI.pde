@@ -85,4 +85,15 @@ class UiState {
       line(p1.x, p1.y, mouseX, mouseY);
     }
   }
+  
+  void createGate(char c) {
+    switch (c) {
+      case 'a':
+        this.circuit.addGate(new AndGate());
+        break;
+      case 'n':
+        this.circuit.addGate(new NotGate());
+        break;
+    }
+  }
 }

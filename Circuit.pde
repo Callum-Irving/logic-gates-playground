@@ -13,17 +13,38 @@ class Circuit {
   }
 
   // TODO: create new InputGate in this function
-  void addInput(String id, InputGate g) {
+  void addInput(String id) {
+    InputGate g = new InputGate();
     this.inputs.add(g);
     this.addGate(id, g);
   }
 
-  void addOutput(String id, OutputGate g) {
+  void addInput() {
+    String id = "input" + str(this.inputs.size());
+    InputGate g = new InputGate();
+    this.inputs.add(g);
+    this.addGate(id, g);
+  }
+
+  void addOutput(String id) {
+    OutputGate g = new OutputGate();
+    this.outputs.put(id, g);
+    this.addGate(id, g);
+  }
+
+  void addOutput() {
+    String id = "output" + str(this.outputs.size());
+    OutputGate g = new OutputGate();
     this.outputs.put(id, g);
     this.addGate(id, g);
   }
 
   void addGate(String id, Gate g) {
+    this.gates.put(id, g);
+  }
+
+  void addGate(Gate g) {
+    String id = "gate" + str(this.gates.size());
     this.gates.put(id, g);
   }
 
