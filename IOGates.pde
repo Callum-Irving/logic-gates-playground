@@ -51,6 +51,10 @@ class InputGate extends Gate {
   PVector outputPos() {
     return new PVector(this.x + 7.5, this.y);
   }
+
+  @Override void clicked() {
+    this.output = !this.output;
+  }
 }
 
 class OutputGate extends Gate {

@@ -14,6 +14,7 @@ UiState ui;
 // - [ ] Avoid having to access circuit.gates directly from outside
 // - [ ] Make sure API and UI interface are both good
 // - [ ] Cleaner abstract gate class(maybe make an interface???)
+// - [ ] Simplify all the mouseOverInput() stuff
 
 void setup() {
   Circuit circ = new Circuit();
@@ -48,7 +49,7 @@ void draw() {
 }
 
 void mouseClicked() {
-  ui.toggleInput();
+  ui.clicked();
 }
 
 void mousePressed() {

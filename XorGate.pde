@@ -1,5 +1,3 @@
-// TODO: Change drawing functions
-
 class XorGate extends Gate {
   XorGate() {
     super(2);

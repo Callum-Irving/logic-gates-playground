@@ -46,6 +46,9 @@ abstract class Gate {
     }
   }
 
+  void clicked() {
+  }
+
   Gate(int n) {
     this(n, int(random(width)), int(random(height)));
   }

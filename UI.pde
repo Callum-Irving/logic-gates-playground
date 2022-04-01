@@ -10,10 +10,10 @@ class UiState {
     this.circuit.compute();
   }
 
-  void toggleInput() {
-    for (InputGate g : this.circuit.inputs) {
+  void clicked() {
+    for (Gate g : this.circuit.gates.values()) {
       if (g.mouseOver()) {
-        g.output = !g.output;
+        g.clicked();
         this.circuit.compute();
         redraw();
       }

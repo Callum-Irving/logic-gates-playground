@@ -1,28 +1,26 @@
 import java.util.LinkedList;
 import java.util.HashSet;
+import java.util.Map;
+import java.util.List;
+import java.util.stream.Collectors;
 
 class Circuit {
   HashMap<String, Gate> gates;
-  ArrayList<InputGate> inputs;
   HashMap<String, OutputGate> outputs;
 
   Circuit() {
     this.gates = new HashMap<String, Gate>();
-    this.inputs = new ArrayList<InputGate>();
     this.outputs = new HashMap<String, OutputGate>();
   }
 
-  // TODO: create new InputGate in this function
   void addInput(String id) {
     InputGate g = new InputGate();
-    this.inputs.add(g);
     this.addGate(id, g);
   }
 
   void addInput() {
-    String id = "input" + str(this.inputs.size());
+    String id = "input" + str(this.gates.size());
     InputGate g = new InputGate(mouseX, mouseY);
-    this.inputs.add(g);
     this.addGate(id, g);
   }
 
@@ -53,14 +51,14 @@ class Circuit {
     src.addConnection(srcId, destId, this.gates.get(destId), destIndex);
   }
 
-  void setInputs(boolean[] inputs) {
-    for (int i = 0; i < this.inputs.size(); i++) {
-      this.inputs.get(i).setVal(inputs[i]);
-    }
-  }
-
-  // Assumes that setInputs() has been called right before
   void compute() {
+    // Processing autoformat breaks this code :(
+    List<Gate> inputList = this.gates.entrySet().stream()
+      .filter(x -> x.getValue() instanceof InputGate)
+      .map(Map.Entry::getValue)
+      .collect(Collectors.toList());
+
+
     HashMap<String, boolean[]> outputs = new HashMap<String, boolean[]>();
 
     for (String id : this.gates.keySet()) {
@@ -69,7 +67,7 @@ class Circuit {
 
     LinkedList<Connection> queue = new LinkedList<Connection>();
 
-    for (InputGate input : this.inputs) {
+    for (Gate input : inputList) {
       for (Connection c : input.connections) {
         queue.add(c);
       }

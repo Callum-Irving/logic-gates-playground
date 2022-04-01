@@ -1,5 +1,3 @@
-// TODO: Change drawing functions
-
 class OrGate extends Gate {
   OrGate() {
     super(2);
@@ -18,7 +16,6 @@ class OrGate extends Gate {
     stroke(0);
     strokeWeight(3);
 
-    //curve(this.x - 65, this.y - 40, this.x - 35, this.y - 20, this.x - 35, this.y + 20, this.x - 65, this.y + 40);
     curve(this.x - 55, this.y - 40, this.x - 25, this.y - 20, this.x - 25, this.y + 20, this.x - 55, this.y + 40);
     curve(this.x - 55, this.y - 20, this.x - 25, this.y - 20, this.x + 15, this.y, this.x + 35, this.y + 40);
     curve(this.x - 55, this.y + 20, this.x - 25, this.y + 20, this.x + 15, this.y, this.x + 35, this.y - 40);
