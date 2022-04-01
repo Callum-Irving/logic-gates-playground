@@ -1,6 +1,5 @@
 UiState ui;
 Circuit circ;
-Gate selected = null;
 
 // TODO: Add ability to create gates with keyboard
 // TODO: Add more gates
