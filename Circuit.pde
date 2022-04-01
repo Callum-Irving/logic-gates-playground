@@ -21,7 +21,7 @@ class Circuit {
 
   void addInput() {
     String id = "input" + str(this.inputs.size());
-    InputGate g = new InputGate();
+    InputGate g = new InputGate(mouseX, mouseY);
     this.inputs.add(g);
     this.addGate(id, g);
   }
@@ -34,7 +34,7 @@ class Circuit {
 
   void addOutput() {
     String id = "output" + str(this.outputs.size());
-    OutputGate g = new OutputGate();
+    OutputGate g = new OutputGate(mouseX, mouseY);
     this.outputs.put(id, g);
     this.addGate(id, g);
   }

@@ -3,6 +3,10 @@ class InputGate extends Gate {
     super(0);
   }
 
+  InputGate(int x, int y) {
+    super(0, x, y);
+  }
+
   void setVal(boolean val) {
     this.output = val;
   }
@@ -52,6 +56,10 @@ class InputGate extends Gate {
 class OutputGate extends Gate {
   OutputGate() {
     super(1);
+  }
+
+  OutputGate(int x, int y) {
+    super(1, x, y);
   }
 
   boolean _compute(boolean[] inputs) {

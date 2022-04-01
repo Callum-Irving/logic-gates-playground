@@ -2,6 +2,10 @@ class AndGate extends Gate {
   AndGate() {
     super(2);
   }
+  
+  AndGate(int x, int y) {
+    super(2, x, y);
+  }
 
   boolean _compute(boolean[] inputs) {
     return inputs[0] & inputs[1];

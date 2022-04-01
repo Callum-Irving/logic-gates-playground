@@ -90,10 +90,16 @@ class UiState {
   void createGate(char c) {
     switch (c) {
       case 'a':
-        this.circuit.addGate(new AndGate());
+        this.circuit.addGate(new AndGate(mouseX, mouseY));
         break;
       case 'n':
-        this.circuit.addGate(new NotGate());
+        this.circuit.addGate(new NotGate(mouseX, mouseY));
+        break;
+      case 'i':
+        this.circuit.addInput();
+        break;
+      case 'o':
+        this.circuit.addOutput();
         break;
     }
   }

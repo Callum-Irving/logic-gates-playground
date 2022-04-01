@@ -3,6 +3,10 @@ class NotGate extends Gate {
     super(1);
   }
 
+  NotGate(int x, int y) {
+    super(1, x, y);
+  }
+
   boolean _compute(boolean[] inputs) {
     return !inputs[0];
   }
