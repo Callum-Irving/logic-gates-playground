@@ -6,11 +6,9 @@ import java.util.stream.Collectors;
 
 class Circuit {
   HashMap<String, Gate> gates;
-  HashMap<String, OutputGate> outputs;
 
   Circuit() {
     this.gates = new HashMap<String, Gate>();
-    this.outputs = new HashMap<String, OutputGate>();
   }
 
   void addInput(String id) {
@@ -19,21 +17,19 @@ class Circuit {
   }
 
   void addInput() {
-    String id = "input" + str(this.gates.size());
+    String id = "gate" + str(this.gates.size());
     InputGate g = new InputGate(mouseX, mouseY);
     this.addGate(id, g);
   }
 
   void addOutput(String id) {
     OutputGate g = new OutputGate();
-    this.outputs.put(id, g);
     this.addGate(id, g);
   }
 
   void addOutput() {
-    String id = "output" + str(this.outputs.size());
+    String id = "gate" + str(this.gates.size());
     OutputGate g = new OutputGate(mouseX, mouseY);
-    this.outputs.put(id, g);
     this.addGate(id, g);
   }
 
@@ -79,7 +75,7 @@ class Circuit {
       outputs.get(c.destId)[c.destIndex] = val;
 
       // If it's an output, evaluate it
-      if (this.outputs.containsKey(c.destId)) {
+      if (this.gates.get(c.destId) instanceof OutputGate) {
         c.dest.compute(outputs.get(c.destId));
       }
 
