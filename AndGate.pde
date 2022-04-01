@@ -2,7 +2,7 @@ class AndGate extends Gate {
   AndGate() {
     super(2);
   }
-  
+
   AndGate(int x, int y) {
     super(2, x, y);
   }
@@ -12,26 +12,34 @@ class AndGate extends Gate {
   }
 
   void show() {
+    // Draw lines connecting inputs and outputs
+    stroke(0);
+    strokeWeight(3);
+    line(this.inputPos(0).x, this.inputPos(0).y, this.x - 20, this.inputPos(0).y);
+    line(this.inputPos(1).x, this.inputPos(1).y, this.x - 20, this.inputPos(1).y);
+    line(this.x, this.outputPos().y, this.outputPos().x, this.outputPos().y);
+
+    // Draw main shape
     noStroke();
     fill(30);
     arc(this.x, this.y, 40, 40, -HALF_PI, HALF_PI, PIE);
-    rect(this.x - 25, this.y - 20, 25, 40);
+    rect(this.x - 20, this.y - 20, 20, 40);
 
     // Draw inputs and outputs
+    stroke(0);
     fill(250);
     strokeWeight(1);
-    stroke(0);
     circle(this.inputPos(0).x, this.inputPos(0).y, 12);
     circle(this.inputPos(1).x, this.inputPos(1).y, 12);
     circle(this.outputPos().x, this.outputPos().y, 12);
   }
 
   boolean mouseOver() {
-    return (mouseX > this.x - 25 && mouseX < this.x + 20 && mouseY > this.y - 20 && mouseY < this.y + 20);
+    return (mouseX > this.x - 20 && mouseX < this.x + 20 && mouseY > this.y - 20 && mouseY < this.y + 20);
   }
 
   boolean mouseOverOutput() {
-    return (sqrt(pow(mouseX - this.x - 15, 2) + pow(mouseY - this.y, 2)) < 6);
+    return (sqrt(pow(mouseX -this.outputPos().x, 2) + pow(mouseY - this.outputPos().y, 2)) < 6);
   }
 
   int mouseOverInput() {
@@ -46,10 +54,10 @@ class AndGate extends Gate {
 
   PVector inputPos(int inputNum) {
     float y = inputNum == 0 ? this.y - 15 : this.y + 15;
-    return new PVector(this.x - 20, y);
+    return new PVector(this.x - 40, y);
   }
 
   PVector outputPos() {
-    return new PVector(this.x + 15, this.y);
+    return new PVector(this.x + 35, this.y);
   }
 }

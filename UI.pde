@@ -86,21 +86,24 @@ class UiState {
       line(p1.x, p1.y, mouseX, mouseY);
     }
   }
-  
+
   void createGate(char c) {
     switch (c) {
-      case 'a':
-        this.circuit.addGate(new AndGate(mouseX, mouseY));
-        break;
-      case 'n':
-        this.circuit.addGate(new NotGate(mouseX, mouseY));
-        break;
-      case 'i':
-        this.circuit.addInput();
-        break;
-      case 'o':
-        this.circuit.addOutput();
-        break;
+    case 'a':
+      this.circuit.addGate(new AndGate(mouseX, mouseY));
+      break;
+    case 'n':
+      this.circuit.addGate(new NotGate(mouseX, mouseY));
+      break;
+    case 'i':
+      this.circuit.addInput();
+      break;
+    case 'o':
+      this.circuit.addOutput();
+      break;
+    case 'x':
+      this.circuit.addGate(new XorGate(mouseX, mouseY));
+      break;
     }
   }
 }
