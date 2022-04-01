@@ -13,6 +13,7 @@ class NotGate extends Gate {
 
   void show() {
     fill(30);
+    noStroke();
     triangle(this.x - 25, this.y - 15, this.x - 25, this.y + 15, this.x, this.y);
     stroke(0);
     strokeWeight(1);
