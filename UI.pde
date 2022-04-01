@@ -95,14 +95,17 @@ class UiState {
     case 'n':
       this.circuit.addGate(new NotGate(mouseX, mouseY));
       break;
-    case 'i':
+    case '1':
       this.circuit.addInput();
       break;
-    case 'o':
+    case '2':
       this.circuit.addOutput();
       break;
     case 'x':
       this.circuit.addGate(new XorGate(mouseX, mouseY));
+      break;
+    case 'o':
+      this.circuit.addGate(new OrGate(mouseX, mouseY));
       break;
     }
   }

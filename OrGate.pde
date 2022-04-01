@@ -1,29 +1,29 @@
 // TODO: Change drawing functions
 
-class XorGate extends Gate {
-  XorGate() {
+class OrGate extends Gate {
+  OrGate() {
     super(2);
   }
 
-  XorGate(int x, int y) {
+ OrGate(int x, int y) {
     super(2, x, y);
   }
 
   boolean _compute(boolean[] inputs) {
-    return inputs[0] ^ inputs[1];
+    return inputs[0] | inputs[1];
   }
 
   void show() {
+    noFill();
     stroke(0);
     strokeWeight(3);
-    noFill();
 
-    curve(this.x - 65, this.y - 40, this.x - 35, this.y - 20, this.x - 35, this.y + 20, this.x - 65, this.y + 40);
+    //curve(this.x - 65, this.y - 40, this.x - 35, this.y - 20, this.x - 35, this.y + 20, this.x - 65, this.y + 40);
     curve(this.x - 55, this.y - 40, this.x - 25, this.y - 20, this.x - 25, this.y + 20, this.x - 55, this.y + 40);
     curve(this.x - 55, this.y - 20, this.x - 25, this.y - 20, this.x + 15, this.y, this.x + 35, this.y + 40);
     curve(this.x - 55, this.y + 20, this.x - 25, this.y + 20, this.x + 15, this.y, this.x + 35, this.y - 40);
-    line(this.x - 55, this.y - 10, this.x - 32, this.y - 10);
-    line(this.x - 55, this.y + 10, this.x - 32, this.y + 10);
+    line(this.x - 45, this.y - 10, this.x - 22, this.y - 10);
+    line(this.x - 45, this.y + 10, this.x - 22, this.y + 10);
     line(this.x + 15, this.y, this.x + 30, this.y);
 
     fill(250);
@@ -53,7 +53,7 @@ class XorGate extends Gate {
 
   PVector inputPos(int inputNum) {
     float y = inputNum == 0 ? this.y - 10 : this.y + 10;
-    return new PVector(this.x - 55, y);
+    return new PVector(this.x - 45, y);
   }
 
   PVector outputPos() {

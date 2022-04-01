@@ -4,6 +4,8 @@ Gate selected = null;
 
 // TODO: Add ability to create gates with keyboard
 // TODO: Add more gates
+// TODO: Delete gates with right click
+// TODO: Serialize and deserialize circuit
 
 void setup() {
   circ = new Circuit();
