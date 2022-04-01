@@ -53,6 +53,7 @@ class UiState {
         }
       }
       this.connecting = false;
+      this.circuit.compute();
     }
     this.selected = null;
     this.selectedId = null;

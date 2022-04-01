@@ -47,10 +47,14 @@ abstract class Gate {
   }
 
   Gate(int n) {
+    this(n, int(random(width)), int(random(height)));
+  }
+
+  Gate(int n, int x, int y) {
     this.numInputs = n;
     this.connections = new ArrayList<Connection>();
     this.inputs = new Gate[n];
-    this.x = int(random(width));
-    this.y = int(random(height));
+    this.x = x;
+    this.y = y;
   }
 }
