@@ -5,7 +5,7 @@ class OrGate extends Gate {
     super(2);
   }
 
- OrGate(int x, int y) {
+  OrGate(int x, int y) {
     super(2, x, y);
   }
 

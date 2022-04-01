@@ -1,13 +1,21 @@
 UiState ui;
-Circuit circ;
 
 // TODO: Add ability to create gates with keyboard
 // TODO: Add more gates
 // TODO: Delete gates with right click
 // TODO: Serialize and deserialize circuit
+// TODO: Zoom in and out
+//    - Requires some changes to coordinate system
+// TODO: Pick consistent design for gates (wire style preffered to fill)
+
+// Refactor:
+// - [ ] Move redraw out of UI
+// - [ ] Avoid having to access circuit.gates directly from outside
+// - [ ] Make sure API and UI interface are both good
+// - [ ] Cleaner abstract gate class(maybe make an interface???)
 
 void setup() {
-  circ = new Circuit();
+  Circuit circ = new Circuit();
 
   //circ.addInput("input0");
   //circ.addInput("input1");
@@ -35,7 +43,6 @@ void setup() {
 
 void draw() {
   background(230);
-
   ui.show();
 }
 
@@ -57,5 +64,4 @@ void mouseDragged() {
 
 void keyPressed() {
   ui.createGate(key);
-  redraw();
 }

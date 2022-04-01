@@ -108,5 +108,6 @@ class UiState {
       this.circuit.addGate(new OrGate(mouseX, mouseY));
       break;
     }
+    redraw();
   }
 }
