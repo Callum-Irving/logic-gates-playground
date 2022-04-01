@@ -4,6 +4,7 @@ UiState ui;
 // TODO: Add more gates
 // TODO: Delete gates with right click
 // TODO: Serialize and deserialize circuit
+//    - Use XML to store gates
 // TODO: Zoom in and out
 //    - Requires some changes to coordinate system
 // TODO: Pick consistent design for gates (wire style preffered to fill)
