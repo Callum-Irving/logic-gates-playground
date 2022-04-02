@@ -9,26 +9,24 @@
  *   - [x] Add ability to create gates with keyboard
  *   - [x] Add more gates
  *   - [x] Delete gates with right click
+ *   - [x] Move overInput and overOutput to abstract class
+ *   - [x] Remove side effects from functions (mouseX and mouseY in drawing)
+ *   - [x] Zoom in and out
  *   - [ ] Serialize and deserialize circuit
  *      - Use XML to store gates?
  *      - Could also use JSON
- *   - [ ] Zoom in and out
- *      - Requires some changes to coordinate system
  *   - [ ] Pick consistent design for gates (wire style preffered to fill)
- *   - [ ] Remove side effects from functions (mouseX and mouseY in drawing)
  *   - [ ] Ability to copy and paste groups of gates
  *      - Requires drag select
  *   - [ ] Comment code
- *   - [ ] Move overInput and overOutput to abstract class
- *      - For input in inputs: if distance(x, y, input) < 5 return i else return -1
  *   - [ ] Move drawing of input and output circles to abstract class
  *
  * Refactor:
- *   - [ ] Move redraw out of UI
+ *   - [x] Move redraw out of UI
+ *   - [x] Simplify all the mouseOverInput() stuff
  *   - [ ] Avoid having to access circuit.gates directly from outside
  *   - [ ] Make sure API and UI interface are both good
  *   - [ ] Cleaner abstract gate class (maybe make an interface???)
- *   - [ ] Simplify all the mouseOverInput() stuff
  *   - [ ] Clean up addGate stuff in circuit
  *   - [ ] Move some of gate removing code to circuit class instead of UI
  *   - [ ] Use outputPos and inputPos in all show functions
@@ -124,12 +122,13 @@ void setup() {
   ui = new UiState(circ);
 
   size(1280, 720);
-  noLoop();
-  redraw();
+  //noLoop();
+  //redraw();
 }
 
 void draw() {
   background(230);
+  ui.applyMovement();
   ui.show();
 }
 
@@ -154,5 +153,9 @@ void mouseDragged() {
 }
 
 void keyPressed() {
-  ui.createGate(key);
+  ui.keyDown();
+}
+
+void keyReleased() {
+  ui.keyUp();
 }
