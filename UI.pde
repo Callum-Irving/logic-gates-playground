@@ -35,6 +35,7 @@ class UiState {
       }
     }
 
+    this.circuit.compute();
     redraw();
   }
 
