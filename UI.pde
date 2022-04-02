@@ -110,6 +110,12 @@ class UiState {
     case 'A':
       this.circuit.addGate(new NandGate(mouseX, mouseY));
       break;
+    case 'O':
+      this.circuit.addGate(new NorGate(mouseX, mouseY));
+      break;
+    case 'X':
+      this.circuit.addGate(new XnorGate(mouseX, mouseY));
+      break;
     }
     redraw();
   }

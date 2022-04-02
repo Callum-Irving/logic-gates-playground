@@ -1,14 +1,14 @@
-class XorGate extends Gate {
-  XorGate() {
+class XnorGate extends Gate {
+  XnorGate() {
     super(2);
   }
 
-  XorGate(int x, int y) {
+  XnorGate(int x, int y) {
     super(2, x, y);
   }
 
   boolean _compute(boolean[] inputs) {
-    return inputs[0] ^ inputs[1];
+    return !(inputs[0] ^ inputs[1]);
   }
 
   void show() {
@@ -22,7 +22,8 @@ class XorGate extends Gate {
     curve(this.x - 55, this.y + 20, this.x - 25, this.y + 20, this.x + 15, this.y, this.x + 35, this.y - 40);
     line(this.x - 55, this.y - 10, this.x - 22, this.y - 10);
     line(this.x - 55, this.y + 10, this.x - 22, this.y + 10);
-    line(this.x + 15, this.y, this.x + 30, this.y);
+    line(this.x + 25, this.y, this.outputPos().x, this.outputPos().y);
+    circle(this.x + 20, this.y, 10);
 
     fill(250);
     strokeWeight(1);
@@ -55,6 +56,6 @@ class XorGate extends Gate {
   }
 
   PVector outputPos() {
-    return new PVector(this.x + 30, this.y);
+    return new PVector(this.x + 40, this.y);
   }
 }

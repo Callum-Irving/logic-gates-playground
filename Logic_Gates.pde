@@ -1,8 +1,7 @@
 /*
  * TODO:
  *   - [x] Add ability to create gates with keyboard
- *   - [ ] Add more gates
- *      - Still need NAND, NOR, and XNOR
+ *   - [x] Add more gates
  *   - [ ] Delete gates with right click
  *   - [ ] Serialize and deserialize circuit
  *      - Use XML to store gates?
@@ -13,6 +12,7 @@
  *   - [ ] Remove side effects from functions (mouseX and mouseY in drawing)
  *   - [ ] Ability to copy and paste groups of gates
  *      - Requires drag select
+ *   - [ ] Comment code
  *
  * Refactor:
  *   - [ ] Move redraw out of UI
