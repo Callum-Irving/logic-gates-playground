@@ -22,26 +22,26 @@ class NotGate extends Gate {
     circle(this.x + 5, this.y, 10);
   }
 
-  boolean mouseOver() {
-    return (mouseX > this.x - 25 && mouseX < this.x + 10 && mouseY > this.y - 15 && mouseY < this.y + 15);
-  }
-
-  boolean mouseOverOutput() {
-    return (sqrt(pow(mouseX - this.x - 5, 2) + pow(mouseY - this.y, 2)) < 5);
-  }
-
-  int mouseOverInput() {
-    if (sqrt(pow(mouseX - this.x + 25, 2) + pow(mouseY - this.y, 2)) < 5)
-      return 0;
-    else
-      return -1;
-  }
-
   PVector inputPos(int _index) {
     return new PVector(this.x - 25, this.y);
   }
 
   PVector outputPos() {
     return new PVector(this.x + 5, this.y);
+  }
+
+  boolean pointTouching(int x, int y) {
+    return (x > this.x - 25 && x < this.x + 10 && y > this.y - 15 && y < this.y + 15);
+  }
+
+  int overInput(int x, int y) {
+    if (distance(x, y, this.inputPos(0).x, this.inputPos(0).y) < 5)
+      return 0;
+    else
+      return -1;
+  }
+
+  boolean overOutput(int x, int y) {
+    return (distance(x, y, this.outputPos().x, this.outputPos().y) < 5);
   }
 }

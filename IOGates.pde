@@ -30,26 +30,27 @@ class InputGate extends Gate {
     circle(this.x + 7.5, this.y, 10);
   }
 
-  boolean mouseOver() {
-    return (mouseX > this.x - 10 && mouseX < this.x + 10 && mouseY > this.y - 10 && mouseY < this.y + 10);
-  }
-
-  boolean mouseOverOutput() {
-    return (sqrt(pow(mouseX - this.x - 7.5, 2) + pow(mouseY - this.y, 2)) < 5);
-  }
-
-  int mouseOverInput() {
-    return -1;
-  }
-
-  // Inputs don't take inputs so this should never be called
-  PVector inputPos(int _index) {
+  // Should never be called
+  PVector inputPos(int _inputNum) {
     assert(true == false);
     return null;
   }
 
   PVector outputPos() {
     return new PVector(this.x + 7.5, this.y);
+  }
+
+  boolean pointTouching(int x, int y) {
+    return (x > this.x  -10 && x < this.x + 10 && y > this.y - 10 && y < this.y + 10);
+  }
+
+  // An input gate doesn't take inputs so this is always -1
+  int overInput(int _x, int _y) {
+    return -1;
+  }
+
+  boolean overOutput(int x, int y) {
+    return (distance(this.outputPos().x, this.outputPos().y, x, y) < 5);
   }
 
   @Override void clicked() {
@@ -81,21 +82,6 @@ class OutputGate extends Gate {
     circle(this.x, this.y, 15);
   }
 
-  boolean mouseOver() {
-    return (sqrt(pow(mouseX - this.x, 2) + pow(mouseY - this.y, 2)) < 10);
-  }
-
-  boolean mouseOverOutput() {
-    return false;
-  }
-
-  int mouseOverInput() {
-    if (sqrt(pow(mouseX - this.x, 2) + pow(mouseY - this.y, 2)) < 10)
-      return 0;
-    else
-      return -1;
-  }
-
   PVector inputPos(int _index) {
     return new PVector(this.x, this.y);
   }
@@ -104,5 +90,21 @@ class OutputGate extends Gate {
   PVector outputPos() {
     assert(true == false);
     return null;
+  }
+
+  boolean pointTouching(int x, int y) {
+    return (distance(this.x, this.y, x, y) < 10);
+  }
+
+  int overInput(int x, int y) {
+    if (this.pointTouching(x, y))
+      return 0;
+    else
+      return -1;
+  }
+
+  // Output gate doesn't have outputs
+  boolean overOutput(int x, int y) {
+    return false;
   }
 }

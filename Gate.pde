@@ -3,13 +3,13 @@ abstract class Gate {
   boolean output = false;
 
   abstract void show();
-  // Returns true if the mouse is colliding with the gate
-  abstract boolean mouseOver();
-  abstract boolean mouseOverOutput();
-  // Returns -1 if false
-  abstract int mouseOverInput();
+
   abstract PVector inputPos(int inputNum);
   abstract PVector outputPos();
+
+  abstract boolean pointTouching(int x, int y);
+  abstract int overInput(int x, int y);
+  abstract boolean overOutput(int x, int y);
 
   void showConnections() {
     for (Connection c : this.connections) {

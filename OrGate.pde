@@ -30,24 +30,6 @@ class OrGate extends Gate {
     circle(this.outputPos().x, this.outputPos().y, 12);
   }
 
-  boolean mouseOver() {
-    return (mouseX > this.x - 25 && mouseX < this.x + 20 && mouseY > this.y - 20 && mouseY < this.y + 20);
-  }
-
-  boolean mouseOverOutput() {
-    return (sqrt(pow(mouseX - this.outputPos().x, 2) + pow(mouseY - this.outputPos().y, 2)) < 6);
-  }
-
-  int mouseOverInput() {
-    if (sqrt(pow(mouseX - this.inputPos(0).x, 2) + pow(mouseY - this.inputPos(0).y, 2)) < 6) {
-      return 0;
-    } else if (sqrt(pow(mouseX - this.inputPos(1).x, 2) + pow(mouseY - this.inputPos(1).y, 2)) < 6) {
-      return 1;
-    } else {
-      return -1;
-    }
-  }
-
   PVector inputPos(int inputNum) {
     float y = inputNum == 0 ? this.y - 10 : this.y + 10;
     return new PVector(this.x - 45, y);
@@ -55,5 +37,22 @@ class OrGate extends Gate {
 
   PVector outputPos() {
     return new PVector(this.x + 30, this.y);
+  }
+
+  boolean pointTouching(int x, int y) {
+    return (x > this.x - 25 && x < this.x + 20 && y > this.y - 20 && y < this.y + 20);
+  }
+
+  int overInput(int x, int y) {
+    if (distance(x, y, this.inputPos(0).x, this.inputPos(0).y) < 6)
+      return 0;
+    else if (distance(x, y, this.inputPos(1).x, this.inputPos(1).y) < 6)
+      return 1;
+    else
+      return -1;
+  }
+
+  boolean overOutput(int x, int y) {
+    return (distance(x, y, this.outputPos().x, this.outputPos().y) < 5);
   }
 }

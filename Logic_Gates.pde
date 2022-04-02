@@ -19,6 +19,8 @@
  *   - [ ] Ability to copy and paste groups of gates
  *      - Requires drag select
  *   - [ ] Comment code
+ *   - [ ] Move overInput and overOutput to abstract class
+ *      - For input in inputs: if distance(x, y, input) < 5 return i else return -1
  *
  * Refactor:
  *   - [ ] Move redraw out of UI
@@ -28,6 +30,7 @@
  *   - [ ] Simplify all the mouseOverInput() stuff
  *   - [ ] Clean up addGate stuff in circuit
  *   - [ ] Move some of gate removing code to circuit class instead of UI
+ *   - [ ] Use outputPos and inputPos in all show functions
  */
 
 UiState ui;

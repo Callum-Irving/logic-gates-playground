@@ -14,7 +14,7 @@ class UiState {
 
   void clicked() {
     for (Gate g : this.circuit.gates.values()) {
-      if (g.mouseOver()) {
+      if (g.pointTouching(mouseX, mouseY)) {
         g.clicked();
         this.circuit.compute();
         redraw();
@@ -26,7 +26,7 @@ class UiState {
   void deleteGate() {
     for (Iterator<Map.Entry<String, Gate>> it = this.circuit.gates.entrySet().iterator(); it.hasNext(); ) {
       Map.Entry<String, Gate> entry = it.next();
-      if (entry.getValue().mouseOver()) {
+      if (entry.getValue().pointTouching(mouseX, mouseY)) {
         for (Gate input : entry.getValue().inputs) {
           if (input == null) continue;
           input.connections.removeIf(c -> c.destId == entry.getKey());
@@ -42,12 +42,12 @@ class UiState {
   void select() {
     for (String id : this.circuit.gates.keySet()) {
       Gate g = this.circuit.gates.get(id);
-      if (g.mouseOverOutput()) {
+      if (g.overOutput(mouseX, mouseY)) {
         this.selectedId = id;
         this.selected = g;
         this.connecting = true;
         return;
-      } else if (g.mouseOver()) {
+      } else if (g.pointTouching(mouseX, mouseY)) {
         this.selected = g;
         return;
       }
@@ -58,9 +58,8 @@ class UiState {
     if (this.connecting) {
       for (String id : this.circuit.gates.keySet()) {
         Gate g = this.circuit.gates.get(id);
-        if (g.mouseOverInput() != -1) {
-          int inputNum = g.mouseOverInput();
-
+        int inputNum = g.overInput(mouseX, mouseY);
+        if (inputNum != -1) {
           // Delete existing connection
           Gate dest = this.circuit.gates.get(id);
           if (dest.inputs[inputNum] == this.selected) {
