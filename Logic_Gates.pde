@@ -4,6 +4,7 @@
  *      - Not a big issue because it doesn't make sense to use disconnected outputs anyways
  *   - It is possible to drag gates off the screen and impossible to get them back on
  *   - When user adds multiple gates with the same name
+ *   - Mouse position not scaled correctly
  *
  * TODO:
  *   - [x] Add ability to create gates with keyboard
@@ -18,18 +19,20 @@
  *   - [ ] Pick consistent design for gates (wire style preffered to fill)
  *   - [ ] Ability to copy and paste groups of gates
  *      - Requires drag select
+ *      - Create box by drag select, then check if gate.x and gate.y are inside box
  *   - [ ] Comment code
- *   - [ ] Move drawing of input and output circles to abstract class
  *
  * Refactor:
  *   - [x] Move redraw out of UI
  *   - [x] Simplify all the mouseOverInput() stuff
+ *   - [ ] Move callback JSON to ui object so we can use "this"
  *   - [ ] Avoid having to access circuit.gates directly from outside
  *   - [ ] Make sure API and UI interface are both good
  *   - [ ] Cleaner abstract gate class (maybe make an interface???)
  *   - [ ] Clean up addGate stuff in circuit
  *   - [ ] Move some of gate removing code to circuit class instead of UI
  *   - [ ] Use outputPos and inputPos in all show functions
+ *   - [ ] Move drawing of input and output circles to abstract class
  */
 
 UiState ui;

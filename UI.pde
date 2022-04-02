@@ -90,7 +90,9 @@ class UiState {
 
   void show() {
     push();
+    translate(width/2, height/2);
     scale(this.scale);
+    translate(-width/2, -height/2);
     translate(this.xOff, this.yOff);
     for (Gate g : this.circuit.gates.values()) {
       g.show();
@@ -110,55 +112,60 @@ class UiState {
   }
 
   void keyDown() {
-    switch (keyCode) {
-    case LEFT:
-      this.keys[0] = true;
-      break;
-    case RIGHT:
-      this.keys[1] = true;
-      break;
-    case UP:
-      this.keys[2] = true;
-      break;
-    case DOWN:
-      this.keys[3] = true;
-      break;
-    }
-
-    switch (key) {
-    case '=':
-      this.scale *= 1.2;
-      break;
-    case '-':
-      this.scale /= 1.2;
-      break;
-    case '1':
-      this.circuit.addInput();
-      break;
-    case '2':
-      this.circuit.addOutput();
-      break;
-    case 'a':
-      this.circuit.addGate(new AndGate(int(this.mouseX()), int(this.mouseY())));
-      break;
-    case 'A':
-      this.circuit.addGate(new NandGate(int(this.mouseX()), int(this.mouseY())));
-      break;
-    case 'n':
-      this.circuit.addGate(new NotGate(int(this.mouseX()), int(this.mouseY())));
-      break;
-    case 'o':
-      this.circuit.addGate(new OrGate(int(this.mouseX()), int(this.mouseY())));
-      break;
-    case 'O':
-      this.circuit.addGate(new NorGate(int(this.mouseX()), int(this.mouseY())));
-      break;
-    case 'x':
-      this.circuit.addGate(new XorGate(int(this.mouseX()), int(this.mouseY())));
-      break;
-    case 'X':
-      this.circuit.addGate(new XnorGate(int(this.mouseX()), int(this.mouseY())));
-      break;
+    if (key == CODED) {
+      switch (keyCode) {
+      case LEFT:
+        this.keys[0] = true;
+        break;
+      case RIGHT:
+        this.keys[1] = true;
+        break;
+      case UP:
+        this.keys[2] = true;
+        break;
+      case DOWN:
+        this.keys[3] = true;
+        break;
+      }
+    } else {
+      switch (key) {
+      case 'l':
+        selectInput("Load a JSON file:", "loadJSON");
+        break;
+      case '=':
+        this.scale *= 1.2;
+        break;
+      case '-':
+        this.scale /= 1.2;
+        break;
+      case '1':
+        this.circuit.addGate(new InputGate(int(this.mouseX()), int(this.mouseY())));
+        break;
+      case '2':
+        this.circuit.addGate(new OutputGate(int(this.mouseX()), int(this.mouseY())));
+        break;
+      case 'a':
+        this.circuit.addGate(new AndGate(int(this.mouseX()), int(this.mouseY())));
+        break;
+      case 'A':
+        this.circuit.addGate(new NandGate(int(this.mouseX()), int(this.mouseY())));
+        break;
+      case 'n':
+        this.circuit.addGate(new NotGate(int(this.mouseX()), int(this.mouseY())));
+        break;
+      case 'o':
+        this.circuit.addGate(new OrGate(int(this.mouseX()), int(this.mouseY())));
+        break;
+      case 'O':
+        this.circuit.addGate(new NorGate(int(this.mouseX()), int(this.mouseY())));
+        break;
+      case 'x':
+        this.circuit.addGate(new XorGate(int(this.mouseX()), int(this.mouseY())));
+        break;
+      case 'X':
+        this.circuit.addGate(new XnorGate(int(this.mouseX()), int(this.mouseY())));
+        break;
+      }
     }
   }
 
@@ -185,10 +192,10 @@ class UiState {
   }
 
   float mouseX() {
-    return mouseX - xOff;
+    return (mouseX - this.xOff) / this.scale;
   }
 
   float mouseY() {
-    return mouseY - yOff;
+    return (mouseY - this.yOff) / this.scale;
   }
 }
