@@ -40,20 +40,7 @@ class NorGate extends Gate {
     return new PVector(this.x + 40, this.y);
   }
 
-  boolean pointTouching(int x, int y) {
+  boolean pointTouching(float x, float y) {
     return (x > this.x - 25 && x < this.x + 20 && y > this.y - 20 && y < this.y + 20);
-  }
-
-  int overInput(int x, int y) {
-    if (distance(x, y, this.inputPos(0).x, this.inputPos(0).y) < 6)
-      return 0;
-    else if (distance(x, y, this.inputPos(1).x, this.inputPos(1).y) < 6)
-      return 1;
-    else
-      return -1;
-  }
-
-  boolean overOutput(int x, int y) {
-    return (distance(x, y, this.outputPos().x, this.outputPos().y) < 6);
   }
 }

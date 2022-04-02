@@ -6,10 +6,19 @@ abstract class Gate {
 
   abstract PVector inputPos(int inputNum);
   abstract PVector outputPos();
+  abstract boolean pointTouching(float x, float y);
 
-  abstract boolean pointTouching(int x, int y);
-  abstract int overInput(int x, int y);
-  abstract boolean overOutput(int x, int y);
+  int overInput(float x, float y) {
+    for (int i = 0; i < this.numInputs; i++) {
+      if (distance(x, y, this.inputPos(i).x, this.inputPos(i).y) < 6)
+        return i;
+    }
+    return -1;
+  }
+
+  boolean overOutput(float x, float y) {
+    return (distance(x, y, this.outputPos().x, this.outputPos().y) < 6);
+  }
 
   void showConnections() {
     for (Connection c : this.connections) {

@@ -30,18 +30,7 @@ class NotGate extends Gate {
     return new PVector(this.x + 5, this.y);
   }
 
-  boolean pointTouching(int x, int y) {
+  boolean pointTouching(float x, float y) {
     return (x > this.x - 25 && x < this.x + 10 && y > this.y - 15 && y < this.y + 15);
-  }
-
-  int overInput(int x, int y) {
-    if (distance(x, y, this.inputPos(0).x, this.inputPos(0).y) < 5)
-      return 0;
-    else
-      return -1;
-  }
-
-  boolean overOutput(int x, int y) {
-    return (distance(x, y, this.outputPos().x, this.outputPos().y) < 5);
   }
 }

@@ -27,7 +27,7 @@ class InputGate extends Gate {
     fill(250);
     stroke(0);
     strokeWeight(1);
-    circle(this.x + 7.5, this.y, 10);
+    circle(this.outputPos().x, this.outputPos().y, 12);
   }
 
   // Should never be called
@@ -40,17 +40,13 @@ class InputGate extends Gate {
     return new PVector(this.x + 7.5, this.y);
   }
 
-  boolean pointTouching(int x, int y) {
+  boolean pointTouching(float x, float y) {
     return (x > this.x  -10 && x < this.x + 10 && y > this.y - 10 && y < this.y + 10);
   }
 
   // An input gate doesn't take inputs so this is always -1
-  int overInput(int _x, int _y) {
+  @Override int overInput(float _x, float _y) {
     return -1;
-  }
-
-  boolean overOutput(int x, int y) {
-    return (distance(this.outputPos().x, this.outputPos().y, x, y) < 5);
   }
 
   @Override void clicked() {
@@ -92,11 +88,11 @@ class OutputGate extends Gate {
     return null;
   }
 
-  boolean pointTouching(int x, int y) {
+  boolean pointTouching(float x, float y) {
     return (distance(this.x, this.y, x, y) < 10);
   }
 
-  int overInput(int x, int y) {
+  @Override int overInput(float x, float y) {
     if (this.pointTouching(x, y))
       return 0;
     else
@@ -104,7 +100,7 @@ class OutputGate extends Gate {
   }
 
   // Output gate doesn't have outputs
-  boolean overOutput(int x, int y) {
+  @Override boolean overOutput(float x, float y) {
     return false;
   }
 }

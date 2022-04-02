@@ -21,6 +21,7 @@
  *   - [ ] Comment code
  *   - [ ] Move overInput and overOutput to abstract class
  *      - For input in inputs: if distance(x, y, input) < 5 return i else return -1
+ *   - [ ] Move drawing of input and output circles to abstract class
  *
  * Refactor:
  *   - [ ] Move redraw out of UI
