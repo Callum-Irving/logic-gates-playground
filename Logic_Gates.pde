@@ -1,20 +1,28 @@
+/*
+ * TODO:
+ *   - [x] Add ability to create gates with keyboard
+ *   - [ ] Add more gates
+ *      - Still need NAND, NOR, and XNOR
+ *   - [ ] Delete gates with right click
+ *   - [ ] Serialize and deserialize circuit
+ *      - Use XML to store gates?
+ *      - Could also use JSON
+ *   - [ ] Zoom in and out
+ *      - Requires some changes to coordinate system
+ *   - [ ] Pick consistent design for gates (wire style preffered to fill)
+ *   - [ ] Remove side effects from functions (mouseX and mouseY in drawing)
+ *   - [ ] Ability to copy and paste groups of gates
+ *      - Requires drag select
+ *
+ * Refactor:
+ *   - [ ] Move redraw out of UI
+ *   - [ ] Avoid having to access circuit.gates directly from outside
+ *   - [ ] Make sure API and UI interface are both good
+ *   - [ ] Cleaner abstract gate class (maybe make an interface???)
+ *   - [ ] Simplify all the mouseOverInput() stuff
+ */
+
 UiState ui;
-
-// TODO: Add ability to create gates with keyboard
-// TODO: Add more gates
-// TODO: Delete gates with right click
-// TODO: Serialize and deserialize circuit
-//    - Use XML to store gates
-// TODO: Zoom in and out
-//    - Requires some changes to coordinate system
-// TODO: Pick consistent design for gates (wire style preffered to fill)
-
-// Refactor:
-// - [ ] Move redraw out of UI
-// - [ ] Avoid having to access circuit.gates directly from outside
-// - [ ] Make sure API and UI interface are both good
-// - [ ] Cleaner abstract gate class(maybe make an interface???)
-// - [ ] Simplify all the mouseOverInput() stuff
 
 void setup() {
   Circuit circ = new Circuit();
