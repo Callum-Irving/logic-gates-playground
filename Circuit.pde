@@ -36,11 +36,7 @@ class Circuit {
   }
 
   void compute() {
-    // Processing autoformat breaks this code :(
-    List<Gate> inputList = this.gates.entrySet().stream()
-      .filter(x -> x.getValue() instanceof InputGate)
-      .map(Map.Entry::getValue)
-      .collect(Collectors.toList());
+    // Get subset of gates that are InputGates
 
     HashMap<String, boolean[]> outputs = new HashMap<String, boolean[]>();
 
@@ -50,7 +46,8 @@ class Circuit {
 
     LinkedList<Connection> queue = new LinkedList<Connection>();
 
-    for (Gate input : inputList) {
+    for (Gate input : this.gates.values()) {
+      if (!(input instanceof InputGate)) continue;
       for (Connection c : input.connections) {
         queue.add(c);
       }

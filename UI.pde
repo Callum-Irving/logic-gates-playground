@@ -32,7 +32,13 @@ class UiState {
       if (entry.getValue().pointTouching(this.mouseX(), this.mouseY())) {
         for (Gate input : entry.getValue().inputs) {
           if (input == null) continue;
-          input.connections.removeIf(c -> c.destId == entry.getKey());
+          int i = 0;
+          while (i < input.connections.size()) {
+            if (input.connections.get(i).destId == entry.getKey())
+              input.connections.remove(i);
+            else
+              i++;
+          }
         }
         it.remove();
       }

@@ -88,6 +88,8 @@ Gate createGate(String type, int x, int y) {
 }
 
 void saveJSON(File output) {
+  if (output == null) return;
+
   JSONObject json = new JSONObject();
 
   JSONArray gates = new JSONArray();
