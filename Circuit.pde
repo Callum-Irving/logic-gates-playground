@@ -54,7 +54,6 @@ class Circuit {
       .map(Map.Entry::getValue)
       .collect(Collectors.toList());
 
-
     HashMap<String, boolean[]> outputs = new HashMap<String, boolean[]>();
 
     for (String id : this.gates.keySet()) {

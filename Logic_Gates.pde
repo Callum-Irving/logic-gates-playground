@@ -2,7 +2,7 @@
  * TODO:
  *   - [x] Add ability to create gates with keyboard
  *   - [x] Add more gates
- *   - [ ] Delete gates with right click
+ *   - [x] Delete gates with right click
  *   - [ ] Serialize and deserialize circuit
  *      - Use XML to store gates?
  *      - Could also use JSON
@@ -20,6 +20,7 @@
  *   - [ ] Make sure API and UI interface are both good
  *   - [ ] Cleaner abstract gate class (maybe make an interface???)
  *   - [ ] Simplify all the mouseOverInput() stuff
+ *   - [ ] Clean up addGate stuff in circuit
  */
 
 UiState ui;
@@ -57,7 +58,11 @@ void draw() {
 }
 
 void mouseClicked() {
-  ui.clicked();
+  if (mouseButton == LEFT) {
+    ui.clicked();
+  } else if (mouseButton == RIGHT) {
+    ui.deleteGate();
+  }
 }
 
 void mousePressed() {

@@ -1,3 +1,5 @@
+import java.util.Iterator;
+
 class UiState {
   String selectedId = null;
   Gate selected = null;
@@ -18,6 +20,22 @@ class UiState {
         redraw();
       }
     }
+  }
+
+  // TODO: Move some of this to circuit class
+  void deleteGate() {
+    for (Iterator<Map.Entry<String, Gate>> it = this.circuit.gates.entrySet().iterator(); it.hasNext(); ) {
+      Map.Entry<String, Gate> entry = it.next();
+      if (entry.getValue().mouseOver()) {
+        for (Gate input : entry.getValue().inputs) {
+          if (input == null) continue;
+          input.connections.removeIf(c -> c.destId == entry.getKey());
+        }
+        it.remove();
+      }
+    }
+
+    redraw();
   }
 
   void select() {
