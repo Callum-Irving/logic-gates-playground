@@ -16,16 +16,12 @@ class JSONConnection {
   }
 }
 
-Circuit loadJSON(File input) {
-  if (input == null) return null;
+void loadJSON(File input) {
+  if (input == null) return;
 
   Circuit circuit = new Circuit();
 
   JSONObject json = loadJSONObject(input.getAbsolutePath());
-
-  float xOff = json.getFloat("xOff");
-  float yOff = json.getFloat("yOff");
-  float scale = json.getFloat("scale");
 
   JSONArray gates = json.getJSONArray("gates");
   ArrayList<JSONConnection> connections = new ArrayList<JSONConnection>();
@@ -44,7 +40,7 @@ Circuit loadJSON(File input) {
     circuit.addGate(name, g);
     JSONArray cons = gate.getJSONArray("connections");
     for (int j = 0; j < cons.size(); j++) {
-      JSONObject connection = cons.getJSONObject(i);
+      JSONObject connection = cons.getJSONObject(j);
       String dest = connection.getString("destId");
       int destIndex = connection.getInt("destIndex");
       connections.add(new JSONConnection(name, dest, destIndex));
@@ -55,12 +51,15 @@ Circuit loadJSON(File input) {
     circuit.addConnection(connection.src, connection.dest, connection.destIndex);
   }
 
-  ui.xOff = xOff;
-  ui.yOff = yOff;
-  ui.scale = scale;
-  ui.circuit = circuit;
+  // This code reads and updates ui state
+  //float xOff = json.getFloat("xOff");
+  //float yOff = json.getFloat("yOff");
+  //float scale = json.getFloat("scale");
+  //ui.xOff = xOff;
+  //ui.yOff = yOff;
+  //ui.scale = scale;
 
-  return circuit;
+  ui.circuit = circuit;
 }
 
 Gate createGate(String type, int x, int y) {
@@ -86,4 +85,55 @@ Gate createGate(String type, int x, int y) {
   default:
     return null;
   }
+}
+
+void saveJSON(File output) {
+  JSONObject json = new JSONObject();
+
+  JSONArray gates = new JSONArray();
+  for (Map.Entry<String, Gate> entry : ui.circuit.gates.entrySet()) {
+    JSONObject gate = new JSONObject();
+    gate.setString("name", entry.getKey());
+
+    Gate g = entry.getValue();
+    if (g instanceof InputGate) {
+      gate.setString("type", "input");
+      gate.setBoolean("output", g.output);
+    } else if (g instanceof OutputGate) {
+      gate.setString("type", "output");
+    } else if (g instanceof AndGate) {
+      gate.setString("type", "AND");
+    } else if (g instanceof NandGate) {
+      gate.setString("type", "NAND");
+    } else if (g instanceof OrGate) {
+      gate.setString("type", "OR");
+    } else if (g instanceof NorGate) {
+      gate.setString("type", "NOR");
+    } else if (g instanceof XorGate) {
+      gate.setString("type", "XOR");
+    } else if (g instanceof XnorGate) {
+      gate.setString("type", "XNOR");
+    } else if (g instanceof NotGate) {
+      gate.setString("type", "NOT");
+    }
+
+    gate.setInt("x", g.x);
+    gate.setInt("y", g.y);
+
+    JSONArray connections = new JSONArray();
+    for (Connection c : g.connections) {
+      JSONObject connection = new JSONObject();
+      connection.setString("destId", c.destId);
+      connection.setInt("destIndex", c.destIndex);
+      connections.append(connection);
+    }
+
+    gate.setJSONArray("connections", connections);
+
+    gates.append(gate);
+  }
+
+  json.setJSONArray("gates", gates);
+
+  saveJSONObject(json, output.getAbsolutePath());
 }

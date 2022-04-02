@@ -26,6 +26,7 @@
  *   - [x] Move redraw out of UI
  *   - [x] Simplify all the mouseOverInput() stuff
  *   - [ ] Move callback JSON to ui object so we can use "this"
+ *      - Not possible
  *   - [ ] Avoid having to access circuit.gates directly from outside
  *   - [ ] Make sure API and UI interface are both good
  *   - [ ] Cleaner abstract gate class (maybe make an interface???)
@@ -122,7 +123,8 @@ void setup() {
 
   circ.addConnection("f3_or", "s5", 0);
 
-  ui = new UiState(circ);
+  //ui = new UiState(circ);
+  ui = new UiState(new Circuit());
 
   size(1280, 720);
   //noLoop();
