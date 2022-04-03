@@ -2,6 +2,8 @@
 
 This is a Processing 3 program that allows you to mess around with logic gates.
 
+![4 bit adder](example.png)
+
 # Loading the Example
 
 I have made an example circuit that adds two four bit binary numbers. You can

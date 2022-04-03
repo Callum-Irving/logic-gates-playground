@@ -1,6 +1,6 @@
 class UiState {
   // The mouse button used to pan. Can be CENTER or RIGHT.
-  static final int PAN_BUTTON = RIGHT;
+  static final int PAN_BUTTON = CENTER;
 
   // Panning and zooming variables.
   float xOff = 0, yOff =0;
