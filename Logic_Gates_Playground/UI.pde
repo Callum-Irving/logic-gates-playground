@@ -25,26 +25,14 @@ class UiState {
     }
   }
 
-  // TODO: Move some of this to circuit class
   void deleteGate() {
-    for (Iterator<Map.Entry<String, Gate>> it = this.circuit.gates.entrySet().iterator(); it.hasNext(); ) {
-      Map.Entry<String, Gate> entry = it.next();
+    for (Map.Entry<String, Gate> entry : this.circuit.gates.entrySet()) {
+      // Remove gate touching mouse
       if (entry.getValue().pointTouching(this.mouseX(), this.mouseY())) {
-        for (Gate input : entry.getValue().inputs) {
-          if (input == null) continue;
-          int i = 0;
-          while (i < input.connections.size()) {
-            if (input.connections.get(i).destId == entry.getKey())
-              input.connections.remove(i);
-            else
-              i++;
-          }
-        }
-        it.remove();
+        this.circuit.removeGate(entry.getKey());
+        break;
       }
     }
-
-    this.circuit.compute();
   }
 
   void select() {

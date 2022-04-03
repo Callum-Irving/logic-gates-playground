@@ -19,6 +19,7 @@
  * Refactor:
  *   - [x] Move redraw out of UI
  *   - [x] Simplify all the mouseOverInput() stuff
+ *   - [x] Move removeGate to circuit class
  *   - [ ] Move callback JSON to ui object so we can use "this"
  *      - Not possible
  *   - [ ] Avoid having to access circuit.gates directly from outside
