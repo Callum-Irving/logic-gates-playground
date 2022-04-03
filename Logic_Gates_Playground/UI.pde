@@ -86,7 +86,13 @@ class UiState {
   }
 
   void dragged() {
-    if (selected != null) {
+    if (mousePressed && mouseButton == CENTER) {
+      // Pan using middle mouse button
+      // Can be changed to right click if you don't have a middle mouse button
+      xOff -= (pmouseX - mouseX) / this.scale;
+      yOff -= (pmouseY - mouseY) / this.scale;
+    } else if (selected != null) {
+      // Move the gate under the mouse
       if (!connecting) {
         selected.x = int(this.mouseX());
         selected.y = int(this.mouseY());
@@ -100,6 +106,7 @@ class UiState {
     scale(this.scale);
     translate(-width/2, -height/2);
     translate(this.xOff, this.yOff);
+
     for (Gate g : this.circuit.gates.values()) {
       g.show();
     }
@@ -118,63 +125,40 @@ class UiState {
   }
 
   void keyDown() {
-    if (key == CODED) {
-      switch (keyCode) {
-      case LEFT:
-        this.keys[0] = true;
-        break;
-      case RIGHT:
-        this.keys[1] = true;
-        break;
-      case UP:
-        this.keys[2] = true;
-        break;
-      case DOWN:
-        this.keys[3] = true;
-        break;
-      }
-    } else {
-      switch (key) {
-      case 'l':
-        selectInput("Load a JSON file:", "loadUiJSON");
-        break;
-      case 's':
-        selectInput("Pick a file to save data to:", "saveUiJSON");
-        break;
-      case '=':
-        this.scale *= 1.2;
-        break;
-      case '-':
-        this.scale /= 1.2;
-        break;
-      case '1':
-        this.circuit.addGate(new InputGate(int(this.mouseX()), int(this.mouseY())));
-        break;
-      case '2':
-        this.circuit.addGate(new OutputGate(int(this.mouseX()), int(this.mouseY())));
-        break;
-      case 'a':
-        this.circuit.addGate(new AndGate(int(this.mouseX()), int(this.mouseY())));
-        break;
-      case 'A':
-        this.circuit.addGate(new NandGate(int(this.mouseX()), int(this.mouseY())));
-        break;
-      case 'n':
-        this.circuit.addGate(new NotGate(int(this.mouseX()), int(this.mouseY())));
-        break;
-      case 'o':
-        this.circuit.addGate(new OrGate(int(this.mouseX()), int(this.mouseY())));
-        break;
-      case 'O':
-        this.circuit.addGate(new NorGate(int(this.mouseX()), int(this.mouseY())));
-        break;
-      case 'x':
-        this.circuit.addGate(new XorGate(int(this.mouseX()), int(this.mouseY())));
-        break;
-      case 'X':
-        this.circuit.addGate(new XnorGate(int(this.mouseX()), int(this.mouseY())));
-        break;
-      }
+    switch (key) {
+    case 'l':
+      selectInput("Load a JSON file:", "loadUiJSON");
+      break;
+    case 's':
+      selectInput("Pick a file to save data to:", "saveUiJSON");
+      break;
+    case '1':
+      this.circuit.addGate(new InputGate(int(this.mouseX()), int(this.mouseY())));
+      break;
+    case '2':
+      this.circuit.addGate(new OutputGate(int(this.mouseX()), int(this.mouseY())));
+      break;
+    case 'a':
+      this.circuit.addGate(new AndGate(int(this.mouseX()), int(this.mouseY())));
+      break;
+    case 'A':
+      this.circuit.addGate(new NandGate(int(this.mouseX()), int(this.mouseY())));
+      break;
+    case 'n':
+      this.circuit.addGate(new NotGate(int(this.mouseX()), int(this.mouseY())));
+      break;
+    case 'o':
+      this.circuit.addGate(new OrGate(int(this.mouseX()), int(this.mouseY())));
+      break;
+    case 'O':
+      this.circuit.addGate(new NorGate(int(this.mouseX()), int(this.mouseY())));
+      break;
+    case 'x':
+      this.circuit.addGate(new XorGate(int(this.mouseX()), int(this.mouseY())));
+      break;
+    case 'X':
+      this.circuit.addGate(new XnorGate(int(this.mouseX()), int(this.mouseY())));
+      break;
     }
   }
 
@@ -195,16 +179,11 @@ class UiState {
     }
   }
 
-  void applyMovement() {
-    this.xOff += (int(this.keys[0]) - int(this.keys[1])) * 5 / this.scale;
-    this.yOff += (int(this.keys[2]) - int(this.keys[3])) * 5 / this.scale;
-  }
-
   float mouseX() {
-    return (mouseX - this.xOff) / this.scale;
+    return mouseX / this.scale + this.xOff;
   }
 
   float mouseY() {
-    return (mouseY - this.yOff) / this.scale;
+    return mouseY / this.scale + this.yOff;
   }
 }

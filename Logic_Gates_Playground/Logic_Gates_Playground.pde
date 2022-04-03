@@ -134,7 +134,6 @@ void setup() {
 
 void draw() {
   background(230);
-  ui.applyMovement();
   ui.show();
 }
 
@@ -156,6 +155,15 @@ void mouseReleased() {
 
 void mouseDragged() {
   ui.dragged();
+}
+
+void mouseWheel(MouseEvent event) {
+  float e = event.getCount();
+  if (e < 0) {
+    ui.scale *= 1.2;
+  } else if (e > 0) {
+    ui.scale /= 1.2;
+  }
 }
 
 void keyPressed() {
