@@ -1,11 +1,4 @@
 /*
- * BUGS:
- *   - When something that connects to an output is disconnected, the output does not turn off
- *      - Not a big issue because it doesn't make sense to use disconnected outputs anyways
- *   - It is possible to drag gates off the screen and impossible to get them back on
- *   - When user adds multiple gates with the same name
- *   - Mouse position not scaled correctly
- *
  * TODO:
  *   - [x] Add ability to create gates with keyboard
  *   - [x] Add more gates
@@ -15,8 +8,8 @@
  *   - [x] Zoom in and out
  *   - [x] Serialize and deserialize circuit
  *   - [x] Pick consistent design for gates (wire style preffered to fill)
+ *   - [x] Prevent gates with the same name
  *   - [ ] Prevent cycles
- *   - [ ] Prevent gates with the same name
  *   - [ ] Add support for gates with multiple outputs
  *   - [ ] Ability to copy and paste groups of gates
  *      - Requires drag select
@@ -128,8 +121,6 @@ void setup() {
   ui = new UiState(new Circuit());
 
   size(1280, 720);
-  //noLoop();
-  //redraw();
 }
 
 void draw() {

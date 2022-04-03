@@ -12,6 +12,11 @@ class Circuit {
   }
 
   void addGate(String id, Gate g) {
+    // Prevents add two gates with the same name
+    if (this.gates.containsKey(id)) {
+      println("Could not add gate '" + id + "' because a gate with this name already exists");
+      return;
+    }
     this.gates.put(id, g);
   }
 
