@@ -15,7 +15,7 @@ class InputGate extends Gate {
     return this.output;
   }
 
-  void show() {
+  void _show() {
     stroke(60);
     strokeWeight(2.5);
     if (this.output)
@@ -67,7 +67,11 @@ class OutputGate extends Gate {
     return inputs[0];
   }
 
-  void show() {
+  @Override void show() {
+    this._show();
+  }
+
+  void _show() {
     noStroke();
     fill(60);
     circle(this.x, this.y, 20);

@@ -11,23 +11,18 @@ class NotGate extends Gate {
     return !inputs[0];
   }
 
-  void show() {
-    // Draw main shape
-    noFill();
+  void _show() {
     stroke(0);
     strokeWeight(3);
+    noFill();
+
+    // Draw main shape
     triangle(this.x - 25, this.y - 15, this.x - 25, this.y + 15, this.x, this.y);
     circle(this.x + 7, this.y, 12);
-    
+
     // Draw lines connecting input and output
     line(this.inputPos(0).x, this.inputPos(0).y, this.x - 25, this.y);
     line(this.outputPos().x, this.outputPos().y, this.x + 13, this.y);
-    
-    // Draw inputs and outputs
-    strokeWeight(1);
-    fill(250);
-    circle(this.inputPos(0).x, this.inputPos(0).y, 12) ;
-    circle(this.outputPos().x, this.outputPos().y, 12);
   }
 
   PVector inputPos(int _index) {

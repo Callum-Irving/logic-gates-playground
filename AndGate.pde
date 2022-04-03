@@ -11,28 +11,21 @@ class AndGate extends Gate {
     return inputs[0] & inputs[1];
   }
 
-  void show() {
-    // Draw lines connecting inputs and outputs
+  void _show() {
     stroke(0);
     strokeWeight(3);
-    line(this.inputPos(0).x, this.inputPos(0).y, this.x - 20, this.inputPos(0).y);
-    line(this.inputPos(1).x, this.inputPos(1).y, this.x - 20, this.inputPos(1).y);
-    line(this.x + 20, this.outputPos().y, this.outputPos().x, this.outputPos().y);
+    noFill();
 
     // Draw main shape
-    noFill();
     arc(this.x, this.y, 40, 40, -HALF_PI, HALF_PI, OPEN);
     line(this.x - 20, this.y - 20, this.x - 20, this.y + 20);
     line(this.x - 20, this.y - 20, this.x, this.y - 20);
     line(this.x - 20, this.y + 20, this.x, this.y + 20);
 
-    // Draw inputs and outputs
-    stroke(0);
-    fill(250);
-    strokeWeight(1);
-    circle(this.inputPos(0).x, this.inputPos(0).y, 12);
-    circle(this.inputPos(1).x, this.inputPos(1).y, 12);
-    circle(this.outputPos().x, this.outputPos().y, 12);
+    // Draw lines connecting inputs and outputs
+    line(this.inputPos(0).x, this.inputPos(0).y, this.x - 20, this.inputPos(0).y);
+    line(this.inputPos(1).x, this.inputPos(1).y, this.x - 20, this.inputPos(1).y);
+    line(this.x + 20, this.outputPos().y, this.outputPos().x, this.outputPos().y);
   }
 
   PVector inputPos(int inputNum) {

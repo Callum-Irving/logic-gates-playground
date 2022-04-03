@@ -15,6 +15,7 @@
  *   - [x] Zoom in and out
  *   - [x] Serialize and deserialize circuit
  *   - [x] Pick consistent design for gates (wire style preffered to fill)
+ *   - [ ] Add support for gates with multiple outputs
  *   - [ ] Ability to copy and paste groups of gates
  *      - Requires drag select
  *      - Create box by drag select, then check if gate.x and gate.y are inside box

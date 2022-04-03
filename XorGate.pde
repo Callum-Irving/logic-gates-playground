@@ -11,24 +11,21 @@ class XorGate extends Gate {
     return inputs[0] ^ inputs[1];
   }
 
-  void show() {
+  void _show() {
     stroke(0);
     strokeWeight(3);
     noFill();
 
+    // Main shape
     curve(this.x - 65, this.y - 40, this.x - 35, this.y - 20, this.x - 35, this.y + 20, this.x - 65, this.y + 40);
     curve(this.x - 55, this.y - 40, this.x - 25, this.y - 20, this.x - 25, this.y + 20, this.x - 55, this.y + 40);
     curve(this.x - 55, this.y - 20, this.x - 25, this.y - 20, this.x + 15, this.y, this.x + 35, this.y + 40);
     curve(this.x - 55, this.y + 20, this.x - 25, this.y + 20, this.x + 15, this.y, this.x + 35, this.y - 40);
+
+    // Lines connecting inputs and outputs
     line(this.x - 55, this.y - 10, this.x - 22, this.y - 10);
     line(this.x - 55, this.y + 10, this.x - 22, this.y + 10);
     line(this.x + 15, this.y, this.x + 30, this.y);
-
-    fill(250);
-    strokeWeight(1);
-    circle(this.inputPos(0).x, this.inputPos(0).y, 12) ;
-    circle(this.inputPos(1).x, this.inputPos(1).y, 12);
-    circle(this.outputPos().x, this.outputPos().y, 12);
   }
 
   PVector inputPos(int inputNum) {

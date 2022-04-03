@@ -2,7 +2,19 @@ abstract class Gate {
   int x, y;
   boolean output = false;
 
-  abstract void show();
+  abstract void _show();
+
+  void show() {
+    this._show();
+    stroke(0);
+    fill(250);
+    strokeWeight(1);
+
+    for (int i = 0; i < this.numInputs; i++) {
+      circle(this.inputPos(i).x, this.inputPos(i).y, 12);
+    }
+    circle(this.outputPos().x, this.outputPos().y, 12);
+  }
 
   abstract PVector inputPos(int inputNum);
   abstract PVector outputPos();
