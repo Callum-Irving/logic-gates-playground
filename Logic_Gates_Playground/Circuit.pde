@@ -1,8 +1,6 @@
 import java.util.LinkedList;
 import java.util.HashSet;
 import java.util.Map;
-import java.util.List;
-import java.util.stream.Collectors;
 
 class Circuit {
   // We can't just use gates.size() because if we create 3 gates then remove the second,
@@ -16,7 +14,7 @@ class Circuit {
   }
 
   void addGate(String id, Gate g) {
-    // Prevents add two gates with the same name
+    // Prevents adding two gates with the same name
     if (this.gates.containsKey(id)) {
       println("Could not add gate '" + id + "' because a gate with this name already exists");
       return;
@@ -37,13 +35,14 @@ class Circuit {
   }
 
   void removeGate(String id) {
-    println("Removing gate:", id);
     // Remove all incoming connections
     for (Gate input : this.gates.get(id).inputs) {
       if (input == null) continue;
       int i = 0;
       while (i < input.connections.size()) {
-        if (input.connections.get(i).destId == id)
+        // Remove connection if the destination is the gate we are removing
+        // We needs to use .equals() instead of == because we are checking referenced objects (strings)
+        if (input.connections.get(i).destId.equals(id))
           input.connections.remove(i);
         else
           i++;
@@ -55,8 +54,6 @@ class Circuit {
   }
 
   void compute() {
-    // Get subset of gates that are InputGates
-
     HashMap<String, boolean[]> outputs = new HashMap<String, boolean[]>();
 
     for (String id : this.gates.keySet()) {

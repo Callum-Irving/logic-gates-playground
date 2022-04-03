@@ -9,6 +9,7 @@
  *   - [x] Serialize and deserialize circuit
  *   - [x] Pick consistent design for gates (wire style preffered to fill)
  *   - [x] Prevent gates with the same name
+ *   - [x] FIX NULLPOINTER EXCEPTION WHEN REMOVING GATES
  *   - [ ] Prevent cycles
  *   - [ ] Add support for gates with multiple outputs
  *   - [ ] Ability to copy and paste groups of gates
