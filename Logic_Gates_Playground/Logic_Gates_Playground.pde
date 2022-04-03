@@ -158,7 +158,3 @@ void mouseWheel(MouseEvent event) {
 void keyPressed() {
   ui.keyDown();
 }
-
-void keyReleased() {
-  ui.keyUp();
-}

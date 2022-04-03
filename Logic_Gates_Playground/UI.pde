@@ -3,7 +3,6 @@ import java.util.Iterator;
 class UiState {
   float xOff = 0, yOff =0;
   float scale = 1.0;
-  boolean[] keys = new boolean[4];
 
   String selectedId = null;
   Gate selected = null;
@@ -148,23 +147,7 @@ class UiState {
     }
   }
 
-  void keyUp() {
-    switch (keyCode) {
-    case LEFT:
-      this.keys[0] = false;
-      break;
-    case RIGHT:
-      this.keys[1] = false;
-      break;
-    case UP:
-      this.keys[2] = false;
-      break;
-    case DOWN:
-      this.keys[3] = false;
-      break;
-    }
-  }
-
+  // Zoom in on the mouse pointer
   void zoom(float value) {
     float prevX = this.mouseX();
     float prevY = this.mouseY();
@@ -176,6 +159,8 @@ class UiState {
     this.xOff -= (prevX - this.mouseX());
     this.yOff -= (prevY - this.mouseY());
   }
+
+  // These functions return the mouse coordinates in world space instead of screen space
 
   float mouseX() {
     return mouseX / this.scale - this.xOff;
