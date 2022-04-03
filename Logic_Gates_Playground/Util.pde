@@ -1,9 +1,13 @@
+// This file contains some utility functions that don't necessarily fit with other classes.
+
+// Returns the distance between 2 points.
 float distance(float x1, float y1, float x2, float y2) {
   float distX = x1 - x2;
   float distY = y1 - y2;
   return (sqrt(distX * distX + distY * distY));
 }
 
+// Class used to store connections where we only have the IDs and not the actual gate objects.
 class JSONConnection {
   String src;
   String dest;
@@ -16,12 +20,15 @@ class JSONConnection {
   }
 }
 
+// The function called when loading a saved JSON file into the UI. This calls loadJSON then
+// stores the resulting circuit in the global Ui variable.
 void loadUiJSON(File input) {
   Circuit newCircuit = loadJSON(input);
   if (newCircuit != null)
     ui.circuit = newCircuit;
 }
 
+// Loads a JSON file and returns the circuit.
 Circuit loadJSON(File input) {
   if (input == null) return null;
 
@@ -61,6 +68,7 @@ Circuit loadJSON(File input) {
   return circuit;
 }
 
+// Creates a gate from the info stored in JSON.
 Gate createGate(String type, int x, int y) {
   switch (type) {
   case "input":
@@ -86,10 +94,12 @@ Gate createGate(String type, int x, int y) {
   }
 }
 
+// Saves the circuit stored in the Ui variable.
 void saveUiJSON(File output) {
   saveJSON(output, ui.circuit);
 }
 
+// Saves a circuit to a file in JSON format.
 void saveJSON(File output, Circuit circuit) {
   if (output == null) return;
 
