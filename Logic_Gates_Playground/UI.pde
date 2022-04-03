@@ -3,8 +3,8 @@ class UiState {
   float xOff = 0, yOff =0;
   float scale = 1.0;
 
-  // The gate the the user is currently modifying, either by moving or
-  // making a new connection.
+  // The gate the the user is currently modifying, either by moving or making a
+  // new connection.
   String selectedId = null;
   Gate selected = null;
 
@@ -29,7 +29,8 @@ class UiState {
     }
   }
 
-  // Deletes the gate under the mouse cursor. This is called when the user right-clicks.
+  // Deletes the gate under the mouse cursor. This is called when the user
+  // right-clicks with the mouse.
   void deleteGate() {
     for (Map.Entry<String, Gate> entry : this.circuit.gates.entrySet()) {
       // Remove gate touching mouse
@@ -40,8 +41,8 @@ class UiState {
     }
   }
 
-  // Handles the mousePressed event. This can mean either the user is moving a gate or
-  // creating a connection.
+  // Handles the mousePressed event. This can mean either the user is moving a
+  // gate or creating a connection.
   void select() {
     for (String id : this.circuit.gates.keySet()) {
       Gate g = this.circuit.gates.get(id);
@@ -81,17 +82,18 @@ class UiState {
     this.selectedId = null;
   }
 
-  // Handles the user dragging the mouse. If middle mouse is pressed then it pans the screen.
-  // Otherwise, if the user has a gate selected then it continues the action they are doing.
-  // This action can be moving a gate or creating a connection.
+  // Handles the user dragging the mouse. If middle mouse is pressed then it
+  // pans the screen. Otherwise, if the user has a gate selected then it
+  // continues the action they are doing. This action can be moving a gate or
+  // creating a connection.
   void dragged() {
     if (mousePressed && mouseButton == CENTER) {
-      // Pan using middle mouse button
-      // Can be changed to right click if you don't have a middle mouse button
+      // Pan using middle mouse button. Can be changed to right click if you
+      // don't have a middle mouse button.
       xOff -= (pmouseX - mouseX) / this.scale;
       yOff -= (pmouseY - mouseY) / this.scale;
     } else if (selected != null) {
-      // Move the gate under the mouse
+      // Move the gate under the mouse.
       if (!connecting) {
         selected.x = int(this.mouseX());
         selected.y = int(this.mouseY());
@@ -99,8 +101,8 @@ class UiState {
     }
   }
 
-  // Applies pan and zoom then draws all gates and connections. If the user is making a new connection
-  // it is drawn in blue.
+  // Applies pan and zoom then draws all gates and connections. If the user is
+  // making a new connection it is drawn in blue.
   void show() {
     push();
     scale(this.scale);
@@ -162,7 +164,7 @@ class UiState {
     }
   }
 
-  // Zoom in on the mouse pointer
+  // Zoom in on the mouse pointer.
   void zoom(float value) {
     float prevX = this.mouseX();
     float prevY = this.mouseY();
@@ -175,7 +177,8 @@ class UiState {
     this.yOff -= (prevY - this.mouseY());
   }
 
-  // These two functions return the mouse coordinates in world space instead of screen space
+  // These two functions return the mouse coordinates in world space instead of
+  // screen space.
   float mouseX() {
     return mouseX / this.scale - this.xOff;
   }

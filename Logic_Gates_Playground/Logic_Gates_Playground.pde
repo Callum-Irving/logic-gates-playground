@@ -1,35 +1,33 @@
 /*
- * TODO:
- *   - [x] Add ability to create gates with keyboard
- *   - [x] Add more gates
- *   - [x] Delete gates with right click
- *   - [x] Move overInput and overOutput to abstract class
- *   - [x] Remove side effects from functions (mouseX and mouseY in drawing)
- *   - [x] Zoom in and out
- *   - [x] Serialize and deserialize circuit
- *   - [x] Pick consistent design for gates (wire style preffered to fill)
- *   - [x] Prevent gates with the same name
- *   - [x] Fix nullpointer exception when removing gates
- *   - [x] Prevent cycles
- *   - [ ] Add support for gates with multiple outputs
- *   - [ ] Ability to copy and paste groups of gates
- *      - Requires drag select
- *      - Create box by drag select, then check if gate.x and gate.y are inside box
- *   - [ ] Comment code
+ * Logic Gates Playground
  *
- * Refactor:
- *   - [x] Move redraw out of UI
- *   - [x] Simplify all the mouseOverInput() stuff
- *   - [x] Move removeGate to circuit class
- *   - [ ] Move callback JSON to ui object so we can use "this"
- *      - Not possible
- *   - [ ] Avoid having to access circuit.gates directly from outside
- *   - [ ] Make sure API and UI interface are both good
- *   - [ ] Cleaner abstract gate class (maybe make an interface???)
- *   - [ ] Clean up addGate stuff in circuit
- *   - [ ] Move some of gate removing code to circuit class instead of UI
- *   - [ ] Use outputPos and inputPos in all show functions
- *   - [ ] Move drawing of input and output circles to abstract class
+ * Author: Callum Irving
+ * Date: April 4th, 2022
+ *
+ * DESCRIPTION:
+ *   This is a program for messing around with logic gates. You can create logic
+ *   gates and connections between them to see what happens. It also has the
+ *   ability to save and load circuits using JSON.
+ *
+ * CONTROLS:
+ *   Left click and drag - move gate
+ *   Middle click and drag - pan
+ *   Scroll wheel - zoom in and out
+ *   Left click - toggle input
+ *   Right click - delete gate
+ *   'l' - load saved circuit
+ *   's' - save current circuit
+ *
+ *   Gate creation:
+ *     '1' - create input gate
+ *     '2' - create output gate
+ *     'a' - create AND gate
+ *     'A' - create NAND gate
+ *     'o' - create OR gate
+ *     'O' - create NOR gate
+ *     'x' - create XOR gate
+ *     'X' - create XNOR gate
+ *     'n' - create NOT gate
  */
 
 UiState ui;

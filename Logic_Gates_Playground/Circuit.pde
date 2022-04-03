@@ -3,8 +3,8 @@ import java.util.HashSet;
 import java.util.Map;
 
 class Circuit {
-  // We can't just use gates.size() because if we remove a gate that isn't the last, we will overwrite
-  // it every time we create a new gate.
+  // We can't just use gates.size() because if we remove a gate that isn't the
+  // last, we will overwrite it every time we create a new gate.
   int gateCount = 0;
 
   // Maps gate IDs to gate objects.
@@ -14,9 +14,10 @@ class Circuit {
     this.gates = new HashMap<String, Gate>();
   }
 
-  // Propagates the inputs throughout the circuit, calling the compute() method of each connected gate.
-  // This method works by doing a breadth-first search from each input gate. It stores the outputs of
-  // all the gates in an intermediary HashMap.
+  // Propagates the inputs throughout the circuit, calling the compute() method
+  // of each connected gate. This method works by doing a breadth-first search
+  // from each input gate. It stores the outputs of all the gates in an
+  // intermediary HashMap.
   void compute() {
     HashMap<String, boolean[]> outputs = new HashMap<String, boolean[]>();
 
@@ -49,9 +50,10 @@ class Circuit {
     }
   }
 
-  // Add a new gate with a custom ID. Makes sure that you don't add a duplicate gate ID.
+  // Add a new gate with a custom ID. Makes sure that you don't add a duplicate
+  // gate ID.
   void addGate(String id, Gate g) {
-    // Prevents adding two gates with the same name
+    // Prevents adding two gates with the same name.
     if (this.gates.containsKey(id)) {
       println("Could not add gate '" + id + "' because a gate with this name already exists");
       return;
@@ -66,13 +68,12 @@ class Circuit {
     this.addGate(id, g);
   }
 
-  // Add a connection from one gate to another. This method also check that there isn't a cycle which
-  // would lead to the compute method never ending.
+  // Add a connection from one gate to another. This method also check that
+  // there isn't a cycle which would lead to the compute method never ending.
   void addConnection(String srcId, String destId, int destIndex) {
     Gate src = this.gates.get(srcId);
 
-    // Check all connections from dest
-    // If we hit src, there was a cycle
+    // Check all connections from dest. If we hit src, there was a cycle.
     LinkedList<Connection> queue = new LinkedList<Connection>();
     for (Connection c : this.gates.get(destId).connections) {
       queue.add(c);
@@ -94,13 +95,14 @@ class Circuit {
 
   // Removes a gate as well as all its incoming and outgoing connections.
   void removeGate(String id) {
-    // Remove all incoming connections
+    // Remove all incoming connections.
     for (Gate input : this.gates.get(id).inputs) {
       if (input == null) continue;
       int i = 0;
       while (i < input.connections.size()) {
-        // Remove connection if the destination is the gate we are removing
-        // We needs to use .equals() instead of == because we are checking referenced objects (strings)
+        // Remove connection if the destination is the gate we are removing We
+        // need to use .equals() instead of == because we are checking
+        // strings which are referenced objects.
         if (input.connections.get(i).destId.equals(id))
           input.connections.remove(i);
         else
