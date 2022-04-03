@@ -1,378 +1,40 @@
 {"gates": [
   {
-    "name": "f2_or",
-    "x": 600,
-    "y": 300,
-    "type": "OR",
-    "connections": [
-      {
-        "destId": "f3_xor2",
-        "destIndex": 0
-      },
-      {
-        "destId": "f3_and2",
-        "destIndex": 0
-      }
-    ]
+    "output": false,
+    "name": "gate3",
+    "x": 404,
+    "y": 404,
+    "type": "input",
+    "connections": [{
+      "destId": "gate1",
+      "destIndex": 1
+    }]
   },
   {
-    "name": "f3_and2",
-    "x": 600,
+    "output": false,
+    "name": "gate0",
+    "x": 384,
+    "y": 283,
+    "type": "input",
+    "connections": [{
+      "destId": "gate1",
+      "destIndex": 0
+    }]
+  },
+  {
+    "name": "gate2",
+    "x": 709,
     "y": 350,
-    "type": "AND",
-    "connections": [{
-      "destId": "f3_or",
-      "destIndex": 1
-    }]
-  },
-  {
-    "name": "f3_and1",
-    "x": 500,
-    "y": 350,
-    "type": "AND",
-    "connections": [{
-      "destId": "f3_or",
-      "destIndex": 0
-    }]
-  },
-  {
-    "name": "f2_xor1",
-    "x": 400,
-    "y": 300,
-    "type": "XOR",
-    "connections": [
-      {
-        "destId": "f2_and2",
-        "destIndex": 1
-      },
-      {
-        "destId": "f2_xor2",
-        "destIndex": 1
-      }
-    ]
-  },
-  {
-    "name": "f2_xor2",
-    "x": 500,
-    "y": 300,
-    "type": "XOR",
-    "connections": [{
-      "destId": "s3",
-      "destIndex": 0
-    }]
-  },
-  {
-    "output": false,
-    "name": "b1",
-    "x": 50,
-    "y": 400,
-    "type": "input",
-    "connections": [
-      {
-        "destId": "h_and",
-        "destIndex": 1
-      },
-      {
-        "destId": "h_xor",
-        "destIndex": 1
-      }
-    ]
-  },
-  {
-    "output": false,
-    "name": "b2",
-    "x": 50,
-    "y": 430,
-    "type": "input",
-    "connections": [
-      {
-        "destId": "f1_xor1",
-        "destIndex": 1
-      },
-      {
-        "destId": "f1_and1",
-        "destIndex": 1
-      }
-    ]
-  },
-  {
-    "output": false,
-    "name": "b3",
-    "x": 50,
-    "y": 460,
-    "type": "input",
-    "connections": [
-      {
-        "destId": "f2_xor1",
-        "destIndex": 1
-      },
-      {
-        "destId": "f2_and1",
-        "destIndex": 1
-      }
-    ]
-  },
-  {
-    "output": false,
-    "name": "b4",
-    "x": 50,
-    "y": 490,
-    "type": "input",
-    "connections": [
-      {
-        "destId": "f3_xor1",
-        "destIndex": 1
-      },
-      {
-        "destId": "f3_and1",
-        "destIndex": 1
-      }
-    ]
-  },
-  {
-    "name": "f3_xor2",
-    "x": 600,
-    "y": 400,
-    "type": "XOR",
-    "connections": [{
-      "destId": "s4",
-      "destIndex": 0
-    }]
-  },
-  {
-    "name": "f3_xor1",
-    "x": 500,
-    "y": 400,
-    "type": "XOR",
-    "connections": [
-      {
-        "destId": "f3_and2",
-        "destIndex": 1
-      },
-      {
-        "destId": "f3_xor2",
-        "destIndex": 1
-      }
-    ]
-  },
-  {
-    "name": "s1",
-    "x": 1000,
-    "y": 200,
     "type": "output",
     "connections": []
   },
   {
-    "name": "s2",
-    "x": 1000,
-    "y": 230,
-    "type": "output",
-    "connections": []
-  },
-  {
-    "name": "s3",
-    "x": 1000,
-    "y": 260,
-    "type": "output",
-    "connections": []
-  },
-  {
-    "name": "f3_or",
-    "x": 700,
-    "y": 400,
-    "type": "OR",
-    "connections": [{
-      "destId": "s5",
-      "destIndex": 0
-    }]
-  },
-  {
-    "name": "s4",
-    "x": 1000,
-    "y": 290,
-    "type": "output",
-    "connections": []
-  },
-  {
-    "name": "s5",
-    "x": 1000,
-    "y": 320,
-    "type": "output",
-    "connections": []
-  },
-  {
-    "name": "h_xor",
-    "x": 215,
-    "y": 100,
-    "type": "XOR",
-    "connections": [{
-      "destId": "s1",
-      "destIndex": 0
-    }]
-  },
-  {
-    "name": "f1_or",
-    "x": 500,
-    "y": 200,
-    "type": "OR",
-    "connections": [
-      {
-        "destId": "f2_xor2",
-        "destIndex": 0
-      },
-      {
-        "destId": "f2_and2",
-        "destIndex": 0
-      }
-    ]
-  },
-  {
-    "name": "h_and",
-    "x": 200,
-    "y": 150,
-    "type": "AND",
-    "connections": [
-      {
-        "destId": "f1_xor2",
-        "destIndex": 0
-      },
-      {
-        "destId": "f1_and2",
-        "destIndex": 0
-      }
-    ]
-  },
-  {
-    "name": "f1_xor1",
-    "x": 300,
-    "y": 200,
-    "type": "XOR",
-    "connections": [
-      {
-        "destId": "f1_and2",
-        "destIndex": 1
-      },
-      {
-        "destId": "f1_xor2",
-        "destIndex": 1
-      }
-    ]
-  },
-  {
-    "name": "f1_xor2",
-    "x": 400,
-    "y": 200,
-    "type": "XOR",
-    "connections": [{
-      "destId": "s2",
-      "destIndex": 0
-    }]
-  },
-  {
-    "name": "f1_and2",
-    "x": 400,
-    "y": 150,
+    "name": "gate1",
+    "x": 524,
+    "y": 328,
     "type": "AND",
     "connections": [{
-      "destId": "f1_or",
-      "destIndex": 1
-    }]
-  },
-  {
-    "name": "f1_and1",
-    "x": 300,
-    "y": 150,
-    "type": "AND",
-    "connections": [{
-      "destId": "f1_or",
-      "destIndex": 0
-    }]
-  },
-  {
-    "output": false,
-    "name": "a1",
-    "x": 50,
-    "y": 100,
-    "type": "input",
-    "connections": [
-      {
-        "destId": "h_and",
-        "destIndex": 0
-      },
-      {
-        "destId": "h_xor",
-        "destIndex": 0
-      }
-    ]
-  },
-  {
-    "output": false,
-    "name": "a2",
-    "x": 50,
-    "y": 130,
-    "type": "input",
-    "connections": [
-      {
-        "destId": "f1_xor1",
-        "destIndex": 0
-      },
-      {
-        "destId": "f1_and1",
-        "destIndex": 0
-      }
-    ]
-  },
-  {
-    "output": false,
-    "name": "a3",
-    "x": 50,
-    "y": 160,
-    "type": "input",
-    "connections": [
-      {
-        "destId": "f2_xor1",
-        "destIndex": 0
-      },
-      {
-        "destId": "f2_and1",
-        "destIndex": 0
-      }
-    ]
-  },
-  {
-    "output": false,
-    "name": "a4",
-    "x": 50,
-    "y": 190,
-    "type": "input",
-    "connections": [
-      {
-        "destId": "f3_xor1",
-        "destIndex": 0
-      },
-      {
-        "destId": "f3_and1",
-        "destIndex": 0
-      }
-    ]
-  },
-  {
-    "name": "f2_and2",
-    "x": 500,
-    "y": 250,
-    "type": "AND",
-    "connections": [{
-      "destId": "f2_or",
-      "destIndex": 1
-    }]
-  },
-  {
-    "name": "f2_and1",
-    "x": 400,
-    "y": 250,
-    "type": "AND",
-    "connections": [{
-      "destId": "f2_or",
+      "destId": "gate2",
       "destIndex": 0
     }]
   }

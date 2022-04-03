@@ -16,8 +16,14 @@ class JSONConnection {
   }
 }
 
-void loadJSON(File input) {
-  if (input == null) return;
+void loadUiJSON(File input) {
+  Circuit newCircuit = loadJSON(input);
+  if (newCircuit != null)
+    ui.circuit = newCircuit;
+}
+
+Circuit loadJSON(File input) {
+  if (input == null) return null;
 
   Circuit circuit = new Circuit();
 
@@ -51,15 +57,8 @@ void loadJSON(File input) {
     circuit.addConnection(connection.src, connection.dest, connection.destIndex);
   }
 
-  // This code reads and updates ui state
-  //float xOff = json.getFloat("xOff");
-  //float yOff = json.getFloat("yOff");
-  //float scale = json.getFloat("scale");
-  //ui.xOff = xOff;
-  //ui.yOff = yOff;
-  //ui.scale = scale;
-
-  ui.circuit = circuit;
+  println("Loaded save from:", input.getAbsolutePath());
+  return circuit;
 }
 
 Gate createGate(String type, int x, int y) {
@@ -87,13 +86,17 @@ Gate createGate(String type, int x, int y) {
   }
 }
 
-void saveJSON(File output) {
+void saveUiJSON(File output) {
+  saveJSON(output, ui.circuit);
+}
+
+void saveJSON(File output, Circuit circuit) {
   if (output == null) return;
 
   JSONObject json = new JSONObject();
 
   JSONArray gates = new JSONArray();
-  for (Map.Entry<String, Gate> entry : ui.circuit.gates.entrySet()) {
+  for (Map.Entry<String, Gate> entry : circuit.gates.entrySet()) {
     JSONObject gate = new JSONObject();
     gate.setString("name", entry.getKey());
 

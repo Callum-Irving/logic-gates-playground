@@ -136,10 +136,10 @@ class UiState {
     } else {
       switch (key) {
       case 'l':
-        selectInput("Load a JSON file:", "loadJSON");
+        selectInput("Load a JSON file:", "loadUiJSON");
         break;
       case 's':
-        selectInput("Pick a file to save data to:", "saveJSON");
+        selectInput("Pick a file to save data to:", "saveUiJSON");
         break;
       case '=':
         this.scale *= 1.2;
