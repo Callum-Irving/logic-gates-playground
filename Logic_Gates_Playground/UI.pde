@@ -190,10 +190,10 @@ class UiState {
   }
 
   float mouseX() {
-    return mouseX / this.scale + this.xOff;
+    return mouseX / this.scale - this.xOff;
   }
 
   float mouseY() {
-    return mouseY / this.scale + this.yOff;
+    return mouseY / this.scale - this.yOff;
   }
 }
