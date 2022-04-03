@@ -14,7 +14,7 @@
  *   - [x] Remove side effects from functions (mouseX and mouseY in drawing)
  *   - [x] Zoom in and out
  *   - [x] Serialize and deserialize circuit
- *   - [ ] Pick consistent design for gates (wire style preffered to fill)
+ *   - [x] Pick consistent design for gates (wire style preffered to fill)
  *   - [ ] Ability to copy and paste groups of gates
  *      - Requires drag select
  *      - Create box by drag select, then check if gate.x and gate.y are inside box
@@ -40,21 +40,21 @@ void setup() {
   Circuit circ = new Circuit();
 
   // Create 4 bit adder
-  circ.addInput("a1", 50, 100);
-  circ.addInput("a2", 50, 130);
-  circ.addInput("a3", 50, 160);
-  circ.addInput("a4", 50, 190);
+  circ.addGate("a1", new InputGate(50, 100));
+  circ.addGate("a2", new InputGate(50, 130));
+  circ.addGate("a3", new InputGate(50, 160));
+  circ.addGate("a4", new InputGate(50, 190));
 
-  circ.addInput("b1", 50, 400);
-  circ.addInput("b2", 50, 430);
-  circ.addInput("b3", 50, 460);
-  circ.addInput("b4", 50, 490);
+  circ.addGate("b1", new InputGate(50, 400));
+  circ.addGate("b2", new InputGate(50, 430));
+  circ.addGate("b3", new InputGate(50, 460));
+  circ.addGate("b4", new InputGate(50, 490));
 
-  circ.addOutput("s1", 1000, 200);
-  circ.addOutput("s2", 1000, 230);
-  circ.addOutput("s3", 1000, 260);
-  circ.addOutput("s4", 1000, 290);
-  circ.addOutput("s5", 1000, 320);
+  circ.addGate("s1", new OutputGate(1000, 200));
+  circ.addGate("s2", new OutputGate(1000, 230));
+  circ.addGate("s3", new OutputGate(1000, 260));
+  circ.addGate("s4", new OutputGate(1000, 290));
+  circ.addGate("s5", new OutputGate(1000, 320));
 
   // Half adder
   circ.addGate("h_and", new AndGate(200, 150));

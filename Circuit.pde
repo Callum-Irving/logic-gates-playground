@@ -11,16 +11,6 @@ class Circuit {
     this.gates = new HashMap<String, Gate>();
   }
 
-  void addInput(String id, int x, int y) {
-    InputGate g = new InputGate(x, y);
-    this.addGate(id, g);
-  }
-
-  void addOutput(String id, int x, int y) {
-    OutputGate g = new OutputGate(x, y);
-    this.addGate(id, g);
-  }
-
   void addGate(String id, Gate g) {
     this.gates.put(id, g);
   }
