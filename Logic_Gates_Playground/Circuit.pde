@@ -28,9 +28,27 @@ class Circuit {
     this.addGate(id, g);
   }
 
-  // TODO: Prevent cycle in this function
   void addConnection(String srcId, String destId, int destIndex) {
     Gate src = this.gates.get(srcId);
+
+    // Check all connections from dest
+    // If we hit src, there was a cycle
+    LinkedList<Connection> queue = new LinkedList<Connection>();
+    for (Connection c : this.gates.get(destId).connections) {
+      queue.add(c);
+    }
+
+    while (queue.size() != 0) {
+      Connection c = queue.poll();
+      if (c.destId.equals(srcId)) {
+        println("ERROR: Connection from '" + srcId + "' to '" + destId + "' causes a cycle");
+        return;
+      }
+      for (Connection d : c.dest.connections) {
+        queue.add(d);
+      }
+    }
+
     src.addConnection(srcId, destId, this.gates.get(destId), destIndex);
   }
 
