@@ -1,4 +1,7 @@
 class UiState {
+  // The mouse button used to pan. Can be CENTER or RIGHT.
+  static final int PAN_BUTTON = RIGHT;
+
   // Panning and zooming variables.
   float xOff = 0, yOff =0;
   float scale = 1.0;
@@ -87,7 +90,7 @@ class UiState {
   // continues the action they are doing. This action can be moving a gate or
   // creating a connection.
   void dragged() {
-    if (mousePressed && mouseButton == CENTER) {
+    if (mousePressed && mouseButton == UiState.PAN_BUTTON) {
       // Pan using middle mouse button. Can be changed to right click if you
       // don't have a middle mouse button.
       xOff -= (pmouseX - mouseX) / this.scale;
