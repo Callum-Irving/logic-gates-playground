@@ -159,11 +159,7 @@ void mouseDragged() {
 
 void mouseWheel(MouseEvent event) {
   float e = event.getCount();
-  if (e < 0) {
-    ui.scale *= 1.2;
-  } else if (e > 0) {
-    ui.scale /= 1.2;
-  }
+  ui.zoom(e);
 }
 
 void keyPressed() {

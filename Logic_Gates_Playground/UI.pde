@@ -102,9 +102,7 @@ class UiState {
 
   void show() {
     push();
-    translate(width/2, height/2);
     scale(this.scale);
-    translate(-width/2, -height/2);
     translate(this.xOff, this.yOff);
 
     for (Gate g : this.circuit.gates.values()) {
@@ -177,6 +175,18 @@ class UiState {
       this.keys[3] = false;
       break;
     }
+  }
+
+  void zoom(float value) {
+    float prevX = this.mouseX();
+    float prevY = this.mouseY();
+    if (value < 0) {
+      ui.scale *= 1.2;
+    } else if (value > 0) {
+      ui.scale /= 1.2;
+    }
+    this.xOff -= (prevX - this.mouseX());
+    this.yOff -= (prevY - this.mouseY());
   }
 
   float mouseX() {

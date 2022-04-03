@@ -20,6 +20,7 @@ class Circuit {
     this.gates.put(id, g);
   }
 
+  // TODO: Prevent cycle in this function
   void addConnection(String srcId, String destId, int destIndex) {
     Gate src = this.gates.get(srcId);
     src.addConnection(srcId, destId, this.gates.get(destId), destIndex);
