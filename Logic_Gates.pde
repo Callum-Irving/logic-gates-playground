@@ -13,9 +13,7 @@
  *   - [x] Move overInput and overOutput to abstract class
  *   - [x] Remove side effects from functions (mouseX and mouseY in drawing)
  *   - [x] Zoom in and out
- *   - [ ] Serialize and deserialize circuit
- *      - Use XML to store gates?
- *      - Could also use JSON
+ *   - [x] Serialize and deserialize circuit
  *   - [ ] Pick consistent design for gates (wire style preffered to fill)
  *   - [ ] Ability to copy and paste groups of gates
  *      - Requires drag select

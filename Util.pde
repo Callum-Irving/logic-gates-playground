@@ -131,11 +131,11 @@ void saveJSON(File output) {
     }
 
     gate.setJSONArray("connections", connections);
-
     gates.append(gate);
   }
 
   json.setJSONArray("gates", gates);
 
   saveJSONObject(json, output.getAbsolutePath());
+  println("Saved circuit to:", output.getAbsolutePath());
 }
