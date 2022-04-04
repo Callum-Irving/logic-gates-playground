@@ -118,7 +118,7 @@ void setup() {
   circ.addConnection("f3_or", "s5", 0);
 
   //ui = new UiState(circ);
-  ui = new UiState(new Circuit());
+  ui = new UiState();
 
   size(1280, 720);
 }

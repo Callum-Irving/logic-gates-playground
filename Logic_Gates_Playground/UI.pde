@@ -20,6 +20,10 @@ class UiState {
   // The core circuit.
   Circuit circuit;
 
+  UiState() {
+    this.circuit = new Circuit();
+  }
+
   UiState(Circuit circuit) {
     this.circuit = circuit;
     this.circuit.compute();
