@@ -1,6 +1,9 @@
 class UiState {
-  // The mouse button used to pan. Can be CENTER or RIGHT.
-  static final int PAN_BUTTON = CENTER;
+  // If true then the SHIFT key must be pressed to pan.
+  static final boolean SHIFT_TO_PAN = true;
+
+  // The mouse button used to pan.
+  static final int PAN_BUTTON = LEFT;
 
   // Panning and zooming variables.
   float xOff = 0, yOff =0;
@@ -90,7 +93,8 @@ class UiState {
   // continues the action they are doing. This action can be moving a gate or
   // creating a connection.
   void dragged() {
-    if (mousePressed && mouseButton == UiState.PAN_BUTTON) {
+    if (mousePressed && mouseButton == UiState.PAN_BUTTON &&
+      (UiState.SHIFT_TO_PAN ? (keyPressed && keyCode == SHIFT) : true)) {
       // Pan using middle mouse button. Can be changed to right click if you
       // don't have a middle mouse button.
       xOff -= (pmouseX - mouseX) / this.scale;
