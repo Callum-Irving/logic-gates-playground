@@ -67,6 +67,7 @@ Circuit loadJSON(File input) {
   }
 
   println("Loaded save from:", input.getAbsolutePath());
+  circuit.compute();
   return circuit;
 }
 

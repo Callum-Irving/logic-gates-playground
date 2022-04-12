@@ -29,6 +29,7 @@
  *     'X' - create XNOR gate
  *     'n' - create NOT gate
  */
+import g4p_controls.*;
 
 UiState ui;
 
@@ -119,6 +120,7 @@ void setup() {
 
   //ui = new UiState(circ);
   ui = new UiState();
+  createGUI();
 
   size(1280, 720);
 }
