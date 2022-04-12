@@ -136,6 +136,12 @@ class UiState {
     pop();
   }
 
+  void addGate(Gate g) {
+    g.x = width / 2;
+    g.y = height / 2;
+    this.circuit.addGate(g);
+  }
+
   // Handles a keyboard key being pressed.
   void keyDown() {
     switch (key) {
